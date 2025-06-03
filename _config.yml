@@ -1,4 +1,7 @@
-title: Pedro Fabián
-#logo: 
-#how_donwloads: true
-theme: jekykk-theme-minimal
+# Configuración para GitHub Pages
+title: "Pedro Fabián Gutiérrez Vidrio - Data Analyst"
+description: "Portafolio profesional de Analista de Datos especializado en Business Intelligence"
+author: "Pedro Fabián Gutiérrez Vidrio"
+
+# Desactivar Jekyll para usar HTML estático
+plugins: []
