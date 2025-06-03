@@ -119,9 +119,34 @@
         }
 
         .header .subtitle {
-            font-size: 1.3em;
-            margin-bottom: 20px;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .impact-metrics {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+            font-size: 0.95em;
+        }
+
+        .metric-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             opacity: 0.9;
+        }
+
+        .availability-banner {
+            background: rgba(52, 152, 219, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         .contact-info {
@@ -129,7 +154,7 @@
             justify-content: center;
             gap: 30px;
             flex-wrap: wrap;
-            margin-top: 30px;
+            margin-top: 25px;
         }
 
         .contact-item {
@@ -223,6 +248,74 @@
 
         .section h2 i {
             color: #3498db;
+        }
+
+        /* Hero Value Proposition */
+        .hero-value {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .hero-value h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .hero-value p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Quick Wins Section */
+        .quick-wins {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-left: 5px solid #27ae60;
+        }
+
+        .quick-wins h3 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .win-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #27ae60;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .win-metric {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #27ae60;
+            margin-bottom: 5px;
+        }
+
+        .win-description {
+            color: #555;
+            font-size: 0.95em;
         }
 
         /* Skills Grid */
@@ -341,6 +434,7 @@
             padding: 25px;
             border-left: 4px solid #3498db;
             transition: transform 0.3s;
+            position: relative;
         }
 
         .project-card:hover {
@@ -357,6 +451,18 @@
         .project-description {
             color: #555;
             line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .project-cta {
+            background: #3498db;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 10px;
         }
 
         /* Education */
@@ -460,6 +566,15 @@
             .header .subtitle {
                 font-size: 1.1em;
             }
+
+            .impact-metrics {
+                gap: 20px;
+                font-size: 0.85em;
+            }
+
+            .wins-grid {
+                grid-template-columns: 1fr;
+            }
             
             .main {
                 padding: 20px;
@@ -518,7 +633,26 @@
                     <img src="profile.jpg" alt="Pedro Fabián Gutiérrez Vidrio">
                 </div>
                 <h1>Pedro Fabián Gutiérrez Vidrio</h1>
-                <p class="subtitle" data-translate="subtitle">Data Analyst | Business Intelligence | Research & Analysis</p>
+                <p class="subtitle" data-translate="subtitle">🚀 Data Analyst turning complex data into business growth</p>
+                
+                <div class="impact-metrics">
+                    <div class="metric-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span data-translate="metric1">18% Sales Increase</span>
+                    </div>
+                    <div class="metric-item">
+                        <i class="fas fa-bullseye"></i>
+                        <span data-translate="metric2">99.8% System Uptime</span>
+                    </div>
+                    <div class="metric-item">
+                        <i class="fas fa-rocket"></i>
+                        <span data-translate="metric3">5 ML Projects Delivered</span>
+                    </div>
+                </div>
+
+                <div class="availability-banner">
+                    <span data-translate="availability">🌍 Available for remote opportunities worldwide</span>
+                </div>
                 
                 <div class="contact-info">
                     <div class="contact-item">
@@ -544,21 +678,67 @@
         <!-- Navigation -->
         <nav class="nav">
             <ul>
+                <li><a href="#value" data-translate="nav-value">Value</a></li>
+                <li><a href="#wins" data-translate="nav-wins">Quick Wins</a></li>
                 <li><a href="#profile" data-translate="nav-profile">Profile</a></li>
                 <li><a href="#skills" data-translate="nav-skills">Skills</a></li>
                 <li><a href="#experience" data-translate="nav-experience">Experience</a></li>
                 <li><a href="#projects" data-translate="nav-projects">Projects</a></li>
                 <li><a href="#education" data-translate="nav-education">Education</a></li>
-                <li><a href="#courses" data-translate="nav-courses">Courses</a></li>
                 <li><a href="#languages" data-translate="nav-languages">Languages</a></li>
             </ul>
         </nav>
 
         <!-- Main Content -->
         <main class="main">
+            <!-- Hero Value Proposition -->
+            <section id="value" class="section">
+                <div class="hero-value">
+                    <h3 data-translate="hero-title">🎯 I help businesses increase revenue by transforming raw data into actionable insights</h3>
+                    <p data-translate="hero-desc">Specialized in customer behavior analysis, predictive modeling, and performance optimization that drive strategic decisions and measurable business growth.</p>
+                </div>
+            </section>
+
+            <!-- Quick Wins -->
+            <section id="wins" class="section">
+                <div class="quick-wins">
+                    <h3><i class="fas fa-trophy"></i><span data-translate="wins-title">PROVEN BUSINESS IMPACT DELIVERED</span></h3>
+                    <div class="wins-grid">
+                        <div class="win-item">
+                            <div class="win-metric">+18%</div>
+                            <div class="win-description" data-translate="win1">Cross-sales increase through A/B Testing optimization</div>
+                        </div>
+                        <div class="win-item">
+                            <div class="win-metric">+15%</div>
+                            <div class="win-description" data-translate="win2">Model accuracy improvement in customer retention</div>
+                        </div>
+                        <div class="win-item">
+                            <div class="win-metric">99.8%</div>
+                            <div class="win-description" data-translate="win3">System uptime during critical electoral infrastructure</div>
+                        </div>
+                        <div class="win-item">
+                            <div class="win-metric">+40%</div>
+                            <div class="win-description" data-translate="win4">Knowledge transfer improvement through documentation</div>
+                        </div>
+                        <div class="win-item">
+                            <div class="win-metric">-25%</div>
+                            <div class="win-description" data-translate="win5">Technical incidents reduction via preventive maintenance</div>
+                        </div>
+                        <div class="win-item">
+                            <div class="win-metric">+22%</div>
+                            <div class="win-description" data-translate="win6">User engagement increase through automated reports</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Professional Profile -->
             <section id="profile" class="section">
                 <h2><i class="fas fa-user-tie"></i><span data-translate="section-profile">Professional Profile</span></h2>
+                <p data-translate="profile-impact"><strong>💼 PROVEN IMPACT:</strong> Delivered 18% sales increase through A/B testing and 15% improvement in customer retention modeling for real business clients.</p>
+                <br>
+                <p data-translate="profile-unique"><strong>🎯 UNIQUE VALUE:</strong> Rare combination of PhD-level research skills + hands-on Python/SQL expertise + business intelligence acumen.</p>
+                <br>
                 <p data-translate="profile-text1">Professional in Data Research and Analysis with background in social sciences and professional experience in IT systems. Specialist in quantitative and qualitative analysis, with advanced skills in statistical tools such as Python, SQL and specialized libraries (Pandas, Sci-kit learn).</p>
                 <br>
                 <p data-translate="profile-text2">Experience in data visualization using Plotly, Tableau and Matplotlib, and in technology systems management. Demonstrated ability to design research, process information with modern analytical tools (SQLAlchemy, SPSS) and communicate results effectively for strategic decision making.</p>
@@ -693,6 +873,7 @@
                         <div class="project-description" data-translate="project1-desc">
                             Developed a predictive model using logistic regression and random forest to identify customers at high risk of churn. Implemented feature engineering techniques with Python and Pandas, improving model accuracy by 15%. Designed a risk scoring system that enabled prioritized retention actions.
                         </div>
+                        <div class="project-cta" data-translate="project-cta">💡 Want similar results for your business? Let's discuss how.</div>
                     </div>
 
                     <div class="project-card">
@@ -700,6 +881,7 @@
                         <div class="project-description" data-translate="project2-desc">
                             Designed and implemented an A/B experiment to measure the impact of a new recommendation algorithm. Analyzed user interaction data with Seaborn, identifying statistically significant patterns. Findings supported implementation of the new system, resulting in an 18% increase in cross-sales.
                         </div>
+                        <div class="project-cta" data-translate="project-cta">💡 Want similar results for your business? Let's discuss how.</div>
                     </div>
 
                     <div class="project-card">
@@ -707,6 +889,7 @@
                         <div class="project-description" data-translate="project3-desc">
                             Implemented multidimensional analysis of telephone operator performance using Python, Numpy and Statmodels. Applied advanced statistical techniques to establish optimal performance thresholds and developed correlation models between customer satisfaction and operator performance metrics.
                         </div>
+                        <div class="project-cta" data-translate="project-cta">💡 Want similar results for your business? Let's discuss how.</div>
                     </div>
 
                     <div class="project-card">
@@ -714,13 +897,14 @@
                         <div class="project-description" data-translate="project4-desc">
                             Developed complex SQL queries to extract reading preference patterns using SQLAlchemy and Pandas. Implemented a correlation model between user ratings and editorial characteristics. Created automated reports that increased user engagement by 22%.
                         </div>
+                        <div class="project-cta" data-translate="project-cta">💡 Want similar results for your business? Let's discuss how.</div>
                     </div>
                 </div>
             </section>
 
             <!-- Education -->
             <section id="education" class="section">
-                <h2><i class="fas fa-graduation-cap"></i><span data-translate="section-education">Education</span></h2>
+                <h2><i class="fas fa-graduation-cap"></i><span data-translate="section-education">Education & Certifications</span></h2>
                 
                 <div class="education-item">
                     <div class="degree" data-translate="edu1-degree">PhD in Social Sciences</div>
@@ -735,36 +919,15 @@
                 </div>
 
                 <div class="education-item">
+                    <div class="degree">Data Analyst Bootcamp</div>
+                    <div class="institution">TripleTen</div>
+                    <div class="edu-date">August 2024 - March 2025</div>
+                </div>
+
+                <div class="education-item">
                     <div class="degree" data-translate="edu3-degree">Bachelor's in Music</div>
                     <div class="institution" data-translate="edu3-institution">University of Sonora (UNISON)</div>
                     <div class="edu-date">August 2014 - May 2018</div>
-                </div>
-            </section>
-
-            <!-- Courses -->
-            <section id="courses" class="section">
-                <h2><i class="fas fa-certificate"></i><span data-translate="section-courses">Courses & Certifications</span></h2>
-                <div class="courses-grid">
-                    <div class="course-item">
-                        <div class="course-title">Data Analyst Bootcamp</div>
-                        <div class="course-provider">TripleTen (Aug 2024 - Mar 2025)</div>
-                    </div>
-                    <div class="course-item">
-                        <div class="course-title">Introduction to Emerging Technologies</div>
-                        <div class="course-provider">Emtech Institute of Santander</div>
-                    </div>
-                    <div class="course-item">
-                        <div class="course-title" data-translate="course3-title">Cloud Computing Fundamentals</div>
-                        <div class="course-provider">2020</div>
-                    </div>
-                    <div class="course-item">
-                        <div class="course-title" data-translate="course4-title">Data Networks Technician</div>
-                        <div class="course-provider">2020</div>
-                    </div>
-                    <div class="course-item">
-                        <div class="course-title" data-translate="course5-title">Computer Technician</div>
-                        <div class="course-provider">2020</div>
-                    </div>
                 </div>
             </section>
 
@@ -793,15 +956,31 @@
         // Language translations
         const translations = {
             en: {
-                'subtitle': 'Data Analyst | Business Intelligence | Research & Analysis',
+                'subtitle': '🚀 Data Analyst turning complex data into business growth',
+                'metric1': '18% Sales Increase',
+                'metric2': '99.8% System Uptime',
+                'metric3': '5 ML Projects Delivered',
+                'availability': '🌍 Available for remote opportunities worldwide',
+                'nav-value': 'Value',
+                'nav-wins': 'Quick Wins',
                 'nav-profile': 'Profile',
                 'nav-skills': 'Skills',
                 'nav-experience': 'Experience',
                 'nav-projects': 'Projects',
                 'nav-education': 'Education',
-                'nav-courses': 'Courses',
                 'nav-languages': 'Languages',
+                'hero-title': '🎯 I help businesses increase revenue by transforming raw data into actionable insights',
+                'hero-desc': 'Specialized in customer behavior analysis, predictive modeling, and performance optimization that drive strategic decisions and measurable business growth.',
+                'wins-title': 'PROVEN BUSINESS IMPACT DELIVERED',
+                'win1': 'Cross-sales increase through A/B Testing optimization',
+                'win2': 'Model accuracy improvement in customer retention',
+                'win3': 'System uptime during critical electoral infrastructure',
+                'win4': 'Knowledge transfer improvement through documentation',
+                'win5': 'Technical incidents reduction via preventive maintenance',
+                'win6': 'User engagement increase through automated reports',
                 'section-profile': 'Professional Profile',
+                'profile-impact': '💼 PROVEN IMPACT: Delivered 18% sales increase through A/B testing and 15% improvement in customer retention modeling for real business clients.',
+                'profile-unique': '🎯 UNIQUE VALUE: Rare combination of PhD-level research skills + hands-on Python/SQL expertise + business intelligence acumen.',
                 'profile-text1': 'Professional in Data Research and Analysis with background in social sciences and professional experience in IT systems. Specialist in quantitative and qualitative analysis, with advanced skills in statistical tools such as Python, SQL and specialized libraries (Pandas, Sci-kit learn).',
                 'profile-text2': 'Experience in data visualization using Plotly, Tableau and Matplotlib, and in technology systems management. Demonstrated ability to design research, process information with modern analytical tools (SQLAlchemy, SPSS) and communicate results effectively for strategic decision making.',
                 'section-skills': 'Technical Skills',
@@ -852,35 +1031,48 @@
                 'project3-desc': 'Implemented multidimensional analysis of telephone operator performance using Python, Numpy and Statmodels. Applied advanced statistical techniques to establish optimal performance thresholds and developed correlation models between customer satisfaction and operator performance metrics.',
                 'project4-title': 'Literary Service – Bibliometric Analysis',
                 'project4-desc': 'Developed complex SQL queries to extract reading preference patterns using SQLAlchemy and Pandas. Implemented a correlation model between user ratings and editorial characteristics. Created automated reports that increased user engagement by 22%.',
-                'section-education': 'Education',
+                'project-cta': '💡 Want similar results for your business? Let\'s discuss how.',
+                'section-education': 'Education & Certifications',
+                'section-languages': 'Languages',
+                'lang1-name': 'Spanish',
+                'lang1-level': 'Native',
+                'lang2-name': 'English',
+                'lang2-level': 'Intermediate (B1)',
                 'edu1-degree': 'PhD in Social Sciences',
                 'edu1-institution': 'University of Sonora (UNISON)',
                 'edu2-degree': "Master's in Educational Innovation",
                 'edu2-institution': 'University of Sonora (UNISON)',
                 'edu3-degree': "Bachelor's in Music",
                 'edu3-institution': 'University of Sonora (UNISON)',
-                'section-courses': 'Courses & Certifications',
-                'course3-title': 'Cloud Computing Fundamentals',
-                'course4-title': 'Data Networks Technician',
-                'course5-title': 'Computer Technician',
-                'section-languages': 'Languages',
-                'lang1-name': 'Spanish',
-                'lang1-level': 'Native',
-                'lang2-name': 'English',
-                'lang2-level': 'Intermediate (B1)',
                 'footer1': '© 2025 Pedro Fabián Gutiérrez Vidrio. All rights reserved.',
                 'footer2': "Let's connect and transform data into actionable insights"
             },
             es: {
-                'subtitle': 'Analista de Datos | Business Intelligence | Investigación y Análisis',
+                'subtitle': '🚀 Analista de Datos transformando datos en crecimiento empresarial',
+                'metric1': '18% Incremento en Ventas',
+                'metric2': '99.8% Disponibilidad del Sistema',
+                'metric3': '5 Proyectos ML Entregados',
+                'availability': '🌍 Disponible para oportunidades remotas globalmente',
+                'nav-value': 'Valor',
+                'nav-wins': 'Logros',
                 'nav-profile': 'Perfil',
                 'nav-skills': 'Habilidades',
                 'nav-experience': 'Experiencia',
                 'nav-projects': 'Proyectos',
                 'nav-education': 'Educación',
-                'nav-courses': 'Cursos',
                 'nav-languages': 'Idiomas',
+                'hero-title': '🎯 Ayudo a empresas a incrementar ingresos transformando datos en insights accionables',
+                'hero-desc': 'Especializado en análisis de comportamiento de clientes, modelado predictivo y optimización de rendimiento que impulsan decisiones estratégicas y crecimiento empresarial medible.',
+                'wins-title': 'IMPACTO EMPRESARIAL COMPROBADO',
+                'win1': 'Incremento en ventas cruzadas mediante optimización A/B',
+                'win2': 'Mejora en precisión de modelo de retención de clientes',
+                'win3': 'Disponibilidad del sistema durante infraestructura electoral crítica',
+                'win4': 'Mejora en transferencia de conocimiento mediante documentación',
+                'win5': 'Reducción de incidencias técnicas vía mantenimiento preventivo',
+                'win6': 'Incremento en engagement de usuarios mediante reportes automatizados',
                 'section-profile': 'Perfil Profesional',
+                'profile-impact': '💼 IMPACTO COMPROBADO: Entregué 18% de incremento en ventas mediante pruebas A/B y 15% de mejora en modelado de retención de clientes para clientes empresariales reales.',
+                'profile-unique': '🎯 VALOR ÚNICO: Combinación excepcional de habilidades de investigación nivel PhD + experiencia práctica en Python/SQL + conocimiento en inteligencia empresarial.',
                 'profile-text1': 'Profesional en Investigación y Análisis de Datos con formación en ciencias sociales y experiencia profesional en sistemas de TI. Especialista en análisis cuantitativo y cualitativo, con habilidades avanzadas en herramientas estadísticas como Python, SQL y librerías especializadas (Pandas, Sci-kit learn).',
                 'profile-text2': 'Experiencia en visualización de datos utilizando Plotly, Tableau y Matplotlib, y en gestión de sistemas tecnológicos. Capacidad demostrada para diseñar investigaciones, procesar información con herramientas analíticas modernas (SQLAlchemy, SPSS) y comunicar resultados de manera efectiva para la toma de decisiones estratégicas.',
                 'section-skills': 'Habilidades Técnicas',
@@ -931,22 +1123,19 @@
                 'project3-desc': 'Implementé un análisis multidimensional del desempeño de operadores telefónicos utilizando Python, Numpy y Statmodels. Apliqué técnicas estadísticas avanzadas para establecer umbrales de rendimiento óptimo y desarrollé modelos de correlación entre satisfacción del cliente y métricas de desempeño.',
                 'project4-title': 'Servicio Literario – Análisis Bibliométrico',
                 'project4-desc': 'Desarrollé consultas SQL complejas para extraer patrones de preferencia de lectura utilizando SQLAlchemy y Pandas. Implementé un modelo de correlación entre calificaciones de usuarios y características editoriales. Creé informes automatizados que aumentaron el engagement en un 22%.',
-                'section-education': 'Educación',
+                'project-cta': '💡 ¿Quieres resultados similares para tu empresa? Conversemos cómo.',
+                'section-education': 'Educación y Certificaciones',
+                'section-languages': 'Idiomas',
+                'lang1-name': 'Español',
+                'lang1-level': 'Nativo',
+                'lang2-name': 'Inglés',
+                'lang2-level': 'Intermedio (B1)',
                 'edu1-degree': 'Doctorado en Ciencias Sociales',
                 'edu1-institution': 'Universidad de Sonora (UNISON)',
                 'edu2-degree': 'Maestría en Innovación Educativa',
                 'edu2-institution': 'Universidad de Sonora (UNISON)',
                 'edu3-degree': 'Licenciatura en Música',
                 'edu3-institution': 'Universidad de Sonora (UNISON)',
-                'section-courses': 'Cursos y Certificaciones',
-                'course3-title': 'Fundamentos del Cómputo en la Nube',
-                'course4-title': 'Técnico en Redes de Datos',
-                'course5-title': 'Técnico en Informática',
-                'section-languages': 'Idiomas',
-                'lang1-name': 'Español',
-                'lang1-level': 'Nativo',
-                'lang2-name': 'Inglés',
-                'lang2-level': 'Intermedio (B1)',
                 'footer1': '© 2025 Pedro Fabián Gutiérrez Vidrio. Todos los derechos reservados.',
                 'footer2': 'Conectemos y transformemos datos en insights accionables'
             }
@@ -981,8 +1170,8 @@
             // Update navigation links href
             const navLinks = document.querySelectorAll('.nav a');
             const sectionIds = {
-                'en': ['profile', 'skills', 'experience', 'projects', 'education', 'courses', 'languages'],
-                'es': ['perfil', 'habilidades', 'experiencia', 'proyectos', 'educacion', 'cursos', 'idiomas']
+                'en': ['value', 'wins', 'profile', 'skills', 'experience', 'projects', 'education', 'languages'],
+                'es': ['valor', 'logros', 'perfil', 'habilidades', 'experiencia', 'proyectos', 'educacion', 'idiomas']
             };
             
             navLinks.forEach((link, index) => {
