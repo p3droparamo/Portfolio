@@ -1,9 +1,9 @@
 # 📊 Portafolio de Pedro Fabián Gutiérrez Vidrio
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Deployed-brightgreen)](https://p3droparamo.github.io/Portfolio/)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
+[![SQL](https://img.shields.io/badge/SQL-336791?style=flat&logo=postgresql&logoColor=white)](https://www.postgresql.org)
+[![GitHub Pages](https://img.shields.io/badge/Hosted%20on-GitHub%20Pages-181717?style=flat&logo=github&logoColor=white)](https://pages.github.com)
 
 ## 🚀 Ver Portafolio en Vivo
 
@@ -25,10 +25,9 @@ Soy **Analista de Datos** y especialista en **Business Intelligence** con experi
 
 ## 🛠️ Tecnologías y Herramientas
 
-### Lenguajes de Programación
+### Lenguajes de Programación y Análisis
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![SQL](https://img.shields.io/badge/SQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
 ### Análisis y Visualización
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
@@ -40,9 +39,14 @@ Soy **Analista de Datos** y especialista en **Business Intelligence** con experi
 ![Scikit Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
 ![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
 
-### Bases de Datos
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+### Herramientas de Gestión
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+![JIRA](https://img.shields.io/badge/JIRA-0052CC?style=for-the-badge&logo=jira&logoColor=white)
+
+### Bases de Datos y Herramientas Estadísticas
 ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white)
+![SPSS](https://img.shields.io/badge/SPSS-1f4e79?style=for-the-badge&logo=ibm&logoColor=white)
 
 ---
 
@@ -119,22 +123,19 @@ Portfolio/
 
 ---
 
-## 🛠️ Tecnologías del Portafolio Web
+## 🛠️ Acerca del Portafolio Web
 
-Este portafolio está construido con:
+Este portafolio fue desarrollado para mostrar mis proyectos y experiencia como analista de datos, utilizando tecnologías web estándar para su presentación:
 
-- **HTML5** - Estructura semántica
-- **CSS3** - Diseño responsive y moderno
-- **JavaScript** - Interactividad y navegación suave
-- **GitHub Pages** - Hosting gratuito
+- **GitHub Pages** - Hosting y deployment
+- **Diseño responsive** - Optimizado para todos los dispositivos
 - **Font Awesome** - Iconografía profesional
 
 ### Características:
 - ✅ Diseño completamente responsive
-- ✅ Navegación suave entre secciones
-- ✅ Animaciones CSS elegantes
+- ✅ Navegación fluida entre secciones  
 - ✅ Optimizado para dispositivos móviles
-- ✅ Carga rápida y SEO friendly
+- ✅ Carga rápida y accesible
 
 ---
 
