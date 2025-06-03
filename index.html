@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,6 +26,42 @@
             background: white;
             box-shadow: 0 0 30px rgba(0,0,0,0.1);
             min-height: 100vh;
+            position: relative;
+        }
+
+        /* Language Switch */
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 8px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .language-switch button {
+            background: none;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .language-switch button.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .language-switch button:hover:not(.active) {
+            background: #f0f0f0;
+            color: #3498db;
         }
 
         /* Header */
@@ -406,6 +442,17 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .language-switch {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+            }
+
+            .language-switch button {
+                padding: 6px 10px;
+                font-size: 0.8em;
+            }
+
             .header h1 {
                 font-size: 2em;
             }
@@ -444,9 +491,25 @@
             padding: 30px 0;
             margin-top: 50px;
         }
+
+        /* Loading transition */
+        .content-transition {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .content-transition.changing {
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body>
+    <!-- Language Switch -->
+    <div class="language-switch">
+        <button id="btn-en" class="active" onclick="changeLanguage('en')">EN</button>
+        <button id="btn-es" onclick="changeLanguage('es')">ES</button>
+    </div>
+
     <div class="container">
         <!-- Header -->
         <header class="header">
@@ -455,7 +518,7 @@
                     <img src="profile.jpg" alt="Pedro Fabián Gutiérrez Vidrio">
                 </div>
                 <h1>Pedro Fabián Gutiérrez Vidrio</h1>
-                <p class="subtitle">Analista de Datos | Business Intelligence | Investigación y Análisis</p>
+                <p class="subtitle" data-translate="subtitle">Data Analyst | Business Intelligence | Research & Analysis</p>
                 
                 <div class="contact-info">
                     <div class="contact-item">
@@ -481,285 +544,485 @@
         <!-- Navigation -->
         <nav class="nav">
             <ul>
-                <li><a href="#perfil">Perfil</a></li>
-                <li><a href="#habilidades">Habilidades</a></li>
-                <li><a href="#experiencia">Experiencia</a></li>
-                <li><a href="#proyectos">Proyectos</a></li>
-                <li><a href="#educacion">Educación</a></li>
-                <li><a href="#cursos">Cursos</a></li>
-                <li><a href="#idiomas">Idiomas</a></li>
+                <li><a href="#profile" data-translate="nav-profile">Profile</a></li>
+                <li><a href="#skills" data-translate="nav-skills">Skills</a></li>
+                <li><a href="#experience" data-translate="nav-experience">Experience</a></li>
+                <li><a href="#projects" data-translate="nav-projects">Projects</a></li>
+                <li><a href="#education" data-translate="nav-education">Education</a></li>
+                <li><a href="#courses" data-translate="nav-courses">Courses</a></li>
+                <li><a href="#languages" data-translate="nav-languages">Languages</a></li>
             </ul>
         </nav>
 
         <!-- Main Content -->
         <main class="main">
-            <!-- Perfil Profesional -->
-            <section id="perfil" class="section">
-                <h2><i class="fas fa-user-tie"></i>Perfil Profesional</h2>
-                <p>Profesional en Investigación y Análisis de Datos con formación en ciencias sociales y experiencia profesional en sistemas de TI. Especialista en análisis cuantitativo y cualitativo, con habilidades avanzadas en herramientas estadísticas como Python, SQL y librerías especializadas (Pandas, Sci-kit learn).</p>
+            <!-- Professional Profile -->
+            <section id="profile" class="section">
+                <h2><i class="fas fa-user-tie"></i><span data-translate="section-profile">Professional Profile</span></h2>
+                <p data-translate="profile-text1">Professional in Data Research and Analysis with background in social sciences and professional experience in IT systems. Specialist in quantitative and qualitative analysis, with advanced skills in statistical tools such as Python, SQL and specialized libraries (Pandas, Sci-kit learn).</p>
                 <br>
-                <p>Experiencia en visualización de datos utilizando Plotly, Tableau y Matplotlib, y en gestión de sistemas tecnológicos. Capacidad demostrada para diseñar investigaciones, procesar información con herramientas analíticas modernas (SQLAlchemy, SPSS) y comunicar resultados de manera efectiva para la toma de decisiones estratégicas.</p>
+                <p data-translate="profile-text2">Experience in data visualization using Plotly, Tableau and Matplotlib, and in technology systems management. Demonstrated ability to design research, process information with modern analytical tools (SQLAlchemy, SPSS) and communicate results effectively for strategic decision making.</p>
             </section>
 
-            <!-- Habilidades Técnicas -->
-            <section id="habilidades" class="section">
-                <h2><i class="fas fa-cogs"></i>Habilidades Técnicas</h2>
+            <!-- Technical Skills -->
+            <section id="skills" class="section">
+                <h2><i class="fas fa-cogs"></i><span data-translate="section-skills">Technical Skills</span></h2>
                 <div class="skills-grid">
                     <div class="skill-category">
-                        <h3>Programación y Análisis</h3>
+                        <h3 data-translate="skills-programming">Programming & Analysis</h3>
                         <ul class="skill-list">
                             <li>Python (Pandas, Sci-kit learn, NumPy)</li>
-                            <li>SQL y SQLAlchemy</li>
+                            <li>SQL & SQLAlchemy</li>
                             <li>Jupyter Notebook</li>
                             <li>SPSS, Statmodels</li>
                             <li>Machine Learning</li>
                         </ul>
                     </div>
                     <div class="skill-category">
-                        <h3>Visualización de Datos</h3>
+                        <h3 data-translate="skills-visualization">Data Visualization</h3>
                         <ul class="skill-list">
-                            <li>Plotly y Dash</li>
+                            <li>Plotly & Dash</li>
                             <li>Tableau</li>
-                            <li>Matplotlib y Seaborn</li>
-                            <li>Dashboards interactivos</li>
-                            <li>KPIs y métricas</li>
+                            <li>Matplotlib & Seaborn</li>
+                            <li data-translate="skills-dashboards">Interactive Dashboards</li>
+                            <li data-translate="skills-kpis">KPIs & Metrics</li>
                         </ul>
                     </div>
                     <div class="skill-category">
-                        <h3>Metodologías</h3>
+                        <h3 data-translate="skills-methodologies">Methodologies</h3>
                         <ul class="skill-list">
-                            <li>Análisis cuantitativo y cualitativo</li>
-                            <li>Modelos predictivos</li>
+                            <li data-translate="skills-analysis">Quantitative & qualitative analysis</li>
+                            <li data-translate="skills-predictive">Predictive models</li>
                             <li>A/B Testing</li>
-                            <li>Análisis estadístico avanzado</li>
+                            <li data-translate="skills-statistical">Advanced statistical analysis</li>
                             <li>Feature Engineering</li>
                         </ul>
                     </div>
                     <div class="skill-category">
-                        <h3>Herramientas y Sistemas</h3>
+                        <h3 data-translate="skills-tools">Tools & Systems</h3>
                         <ul class="skill-list">
-                            <li>Git y GitHub</li>
+                            <li>Git & GitHub</li>
                             <li>JIRA, Zendesk</li>
                             <li>INTERTEL</li>
-                            <li>Gestión de bases de datos</li>
-                            <li>Administración de redes</li>
+                            <li data-translate="skills-database">Database management</li>
+                            <li data-translate="skills-network">Network administration</li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- Experiencia Laboral -->
-            <section id="experiencia" class="section">
-                <h2><i class="fas fa-briefcase"></i>Experiencia Laboral</h2>
+            <!-- Work Experience -->
+            <section id="experience" class="section">
+                <h2><i class="fas fa-briefcase"></i><span data-translate="section-experience">Work Experience</span></h2>
                 
                 <div class="experience-card">
                     <div class="experience-header">
                         <div>
-                            <div class="job-title">Analista de datos</div>
+                            <div class="job-title" data-translate="job1-title">Data Analyst</div>
                             <div class="company">Practicum Bootcamp | TripleTen</div>
                         </div>
                         <div class="date">08/2024 - 03/2025</div>
                     </div>
                     <ul class="responsibilities">
-                        <li>Desarrollé 5 proyectos analíticos aplicando metodologías avanzadas de ciencia de datos y machine learning</li>
-                        <li>Implementé modelos predictivos utilizando regresión logística y random forest para identificar patrones de abandono de clientes</li>
-                        <li>Diseñé y ejecuté experimentos A/B para evaluar algoritmos de recomendación, mejorando la toma de decisiones basada en datos</li>
-                        <li>Desarrollé visualizaciones interactivas con Plotly, Dash y Matplotlib para comunicar hallazgos clave a stakeholders</li>
-                        <li>Creé consultas SQL complejas para análisis bibliométricos, identificando correlaciones significativas entre variables de negocio</li>
-                        <li>Elaboré un sistema de evaluación de rendimiento utilizando Python y técnicas estadísticas avanzadas para optimizar KPIs operativos</li>
+                        <li data-translate="job1-resp1">Developed 5 analytical projects applying advanced data science and machine learning methodologies</li>
+                        <li data-translate="job1-resp2">Implemented predictive models using logistic regression and random forest to identify customer churn patterns</li>
+                        <li data-translate="job1-resp3">Designed and executed A/B experiments to evaluate recommendation algorithms, improving data-driven decision making</li>
+                        <li data-translate="job1-resp4">Developed interactive visualizations with Plotly, Dash and Matplotlib to communicate key findings to stakeholders</li>
+                        <li data-translate="job1-resp5">Created complex SQL queries for bibliometric analysis, identifying significant correlations between business variables</li>
+                        <li data-translate="job1-resp6">Developed a performance evaluation system using Python and advanced statistical techniques to optimize operational KPIs</li>
                     </ul>
                 </div>
 
                 <div class="experience-card">
                     <div class="experience-header">
                         <div>
-                            <div class="job-title">Técnico de voz y datos</div>
-                            <div class="company">Instituto Nacional Electoral</div>
+                            <div class="job-title" data-translate="job2-title">Voice & Data Technician</div>
+                            <div class="company" data-translate="job2-company">National Electoral Institute</div>
                         </div>
                         <div class="date">01/2024 – 07/2024</div>
                     </div>
                     <ul class="responsibilities">
-                        <li>Gestioné la instalación y configuración de sistemas de comunicación críticos, garantizando la operatividad durante procesos electorales</li>
-                        <li>Resolví incidencias técnicas en redes de voz y datos con un tiempo de respuesta promedio de menos de 2 horas</li>
-                        <li>Brindé soporte técnico especializado a más de 50 usuarios, mejorando la productividad del personal electoral</li>
-                        <li>Participé en la implementación y mantenimiento de la infraestructura de red para las elecciones federales 2024, asegurando una conectividad del 99.8%</li>
-                        <li>Colaboré en el diseño de protocolos de seguridad para proteger la integridad de los datos electorales</li>
+                        <li data-translate="job2-resp1">Managed installation and configuration of critical communication systems, ensuring operability during electoral processes</li>
+                        <li data-translate="job2-resp2">Resolved technical incidents in voice and data networks with an average response time of less than 2 hours</li>
+                        <li data-translate="job2-resp3">Provided specialized technical support to more than 50 users, improving electoral staff productivity</li>
+                        <li data-translate="job2-resp4">Participated in implementation and maintenance of network infrastructure for 2024 federal elections, ensuring 99.8% connectivity</li>
+                        <li data-translate="job2-resp5">Collaborated in designing security protocols to protect electoral data integrity</li>
                     </ul>
                 </div>
 
                 <div class="experience-card">
                     <div class="experience-header">
                         <div>
-                            <div class="job-title">Ingeniero de Servicios Administrados</div>
+                            <div class="job-title" data-translate="job3-title">Managed Services Engineer</div>
                             <div class="company">INTERSEL</div>
                         </div>
                         <div class="date">10/2021 - 11/2023</div>
                     </div>
                     <ul class="responsibilities">
-                        <li>Implementé soluciones de monitoreo para infraestructura tecnológica de múltiples clientes corporativos</li>
-                        <li>Diseñé dashboards mensuales utilizando herramientas de visualización para presentar KPIs críticos a la dirección</li>
-                        <li>Analicé problemas técnicos complejos y desarrollé soluciones optimizadas mediante consultas SQL avanzadas</li>
-                        <li>Documenté procesos técnicos y procedimientos operativos, mejorando la transferencia de conocimiento en un 40%</li>
-                        <li>Implementé mejoras en gestión de bases de datos que incrementaron la eficiencia operativa en un 15%</li>
+                        <li data-translate="job3-resp1">Implemented monitoring solutions for technological infrastructure of multiple corporate clients</li>
+                        <li data-translate="job3-resp2">Designed monthly dashboards using visualization tools to present critical KPIs to management</li>
+                        <li data-translate="job3-resp3">Analyzed complex technical problems and developed optimized solutions through advanced SQL queries</li>
+                        <li data-translate="job3-resp4">Documented technical processes and operational procedures, improving knowledge transfer by 40%</li>
+                        <li data-translate="job3-resp5">Implemented database management improvements that increased operational efficiency by 15%</li>
                     </ul>
                 </div>
 
                 <div class="experience-card">
                     <div class="experience-header">
                         <div>
-                            <div class="job-title">Encargado de Soporte Técnico</div>
-                            <div class="company">Centro de Distribución Soriana</div>
+                            <div class="job-title" data-translate="job4-title">Technical Support Manager</div>
+                            <div class="company" data-translate="job4-company">Soriana Distribution Center</div>
                         </div>
                         <div class="date">06/2019 - 07/2021</div>
                     </div>
                     <ul class="responsibilities">
-                        <li>Administré sistemas informáticos críticos para la operación del centro de distribución que procesaba más de 10,000 productos diarios</li>
-                        <li>Desarrollé reportes periódicos utilizando herramientas analíticas para apoyar la toma de decisiones operativas</li>
-                        <li>Implementé soluciones de mantenimiento preventivo que redujeron las incidencias técnicas en un 25%</li>
-                        <li>Gestioné bases de datos operativas y elaboré informes analíticos para la dirección logística regional</li>
+                        <li data-translate="job4-resp1">Administered critical computer systems for distribution center operations processing over 10,000 products daily</li>
+                        <li data-translate="job4-resp2">Developed periodic reports using analytical tools to support operational decision making</li>
+                        <li data-translate="job4-resp3">Implemented preventive maintenance solutions that reduced technical incidents by 25%</li>
+                        <li data-translate="job4-resp4">Managed operational databases and prepared analytical reports for regional logistics management</li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Proyectos Destacados -->
-            <section id="proyectos" class="section">
-                <h2><i class="fas fa-project-diagram"></i>Proyectos Técnicos Destacados</h2>
+            <!-- Featured Projects -->
+            <section id="projects" class="section">
+                <h2><i class="fas fa-project-diagram"></i><span data-translate="section-projects">Featured Technical Projects</span></h2>
                 <div class="projects-grid">
                     <div class="project-card">
-                        <div class="project-title">Model Fitness – Análisis Predictivo de Retención</div>
-                        <div class="project-description">
-                            Desarrollé un modelo predictivo utilizando regresión logística y random forest para identificar clientes con alto riesgo de abandono. Implementé técnicas de feature engineering con Python y Pandas, mejorando la precisión del modelo en un 15%. Diseñé un sistema de puntuación de riesgo que permitió priorizar acciones de retención.
+                        <div class="project-title" data-translate="project1-title">Model Fitness – Customer Retention Predictive Analysis</div>
+                        <div class="project-description" data-translate="project1-desc">
+                            Developed a predictive model using logistic regression and random forest to identify customers at high risk of churn. Implemented feature engineering techniques with Python and Pandas, improving model accuracy by 15%. Designed a risk scoring system that enabled prioritized retention actions.
                         </div>
                     </div>
 
                     <div class="project-card">
-                        <div class="project-title">Tienda en Línea – Sistema de Recomendaciones</div>
-                        <div class="project-description">
-                            Diseñé e implementé un experimento A/B para medir el impacto de un nuevo algoritmo de recomendaciones. Analicé datos de interacción de usuarios con Seaborn, identificando patrones estadísticamente significativos. Los hallazgos fundamentaron la implementación del nuevo sistema, resultando en un incremento del 18% en ventas cruzadas.
+                        <div class="project-title" data-translate="project2-title">Online Store – Recommendation System</div>
+                        <div class="project-description" data-translate="project2-desc">
+                            Designed and implemented an A/B experiment to measure the impact of a new recommendation algorithm. Analyzed user interaction data with Seaborn, identifying statistically significant patterns. Findings supported implementation of the new system, resulting in an 18% increase in cross-sales.
                         </div>
                     </div>
 
                     <div class="project-card">
-                        <div class="project-title">CallMeMaybe – Evaluación de Rendimiento</div>
-                        <div class="project-description">
-                            Implementé un análisis multidimensional del desempeño de operadores telefónicos utilizando Python, Numpy y Statmodels. Apliqué técnicas estadísticas avanzadas para establecer umbrales de rendimiento óptimo y desarrollé modelos de correlación entre satisfacción del cliente y métricas de desempeño.
+                        <div class="project-title" data-translate="project3-title">CallMeMaybe – Performance Evaluation</div>
+                        <div class="project-description" data-translate="project3-desc">
+                            Implemented multidimensional analysis of telephone operator performance using Python, Numpy and Statmodels. Applied advanced statistical techniques to establish optimal performance thresholds and developed correlation models between customer satisfaction and operator performance metrics.
                         </div>
                     </div>
 
                     <div class="project-card">
-                        <div class="project-title">Servicio Literario – Análisis Bibliométrico</div>
-                        <div class="project-description">
-                            Desarrollé consultas SQL complejas para extraer patrones de preferencia de lectura utilizando SQLAlchemy y Pandas. Implementé un modelo de correlación entre calificaciones de usuarios y características editoriales. Creé informes automatizados que aumentaron el engagement en un 22%.
+                        <div class="project-title" data-translate="project4-title">Literary Service – Bibliometric Analysis</div>
+                        <div class="project-description" data-translate="project4-desc">
+                            Developed complex SQL queries to extract reading preference patterns using SQLAlchemy and Pandas. Implemented a correlation model between user ratings and editorial characteristics. Created automated reports that increased user engagement by 22%.
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Educación -->
-            <section id="educacion" class="section">
-                <h2><i class="fas fa-graduation-cap"></i>Educación</h2>
+            <!-- Education -->
+            <section id="education" class="section">
+                <h2><i class="fas fa-graduation-cap"></i><span data-translate="section-education">Education</span></h2>
                 
                 <div class="education-item">
-                    <div class="degree">Doctorado en Ciencias Sociales</div>
-                    <div class="institution">Universidad de Sonora (UNISON)</div>
-                    <div class="edu-date">Agosto 2022 - Mayo 2025</div>
+                    <div class="degree" data-translate="edu1-degree">PhD in Social Sciences</div>
+                    <div class="institution" data-translate="edu1-institution">University of Sonora (UNISON)</div>
+                    <div class="edu-date">August 2022 - May 2025</div>
                 </div>
 
                 <div class="education-item">
-                    <div class="degree">Maestría en Innovación Educativa</div>
-                    <div class="institution">Universidad de Sonora (UNISON)</div>
-                    <div class="edu-date">Agosto 2019 - Mayo 2021</div>
+                    <div class="degree" data-translate="edu2-degree">Master's in Educational Innovation</div>
+                    <div class="institution" data-translate="edu2-institution">University of Sonora (UNISON)</div>
+                    <div class="edu-date">August 2019 - May 2021</div>
                 </div>
 
                 <div class="education-item">
-                    <div class="degree">Licenciatura en Música</div>
-                    <div class="institution">Universidad de Sonora (UNISON)</div>
-                    <div class="edu-date">Agosto 2014 - Mayo 2018</div>
+                    <div class="degree" data-translate="edu3-degree">Bachelor's in Music</div>
+                    <div class="institution" data-translate="edu3-institution">University of Sonora (UNISON)</div>
+                    <div class="edu-date">August 2014 - May 2018</div>
                 </div>
             </section>
 
-            <!-- Cursos -->
-            <section id="cursos" class="section">
-                <h2><i class="fas fa-certificate"></i>Cursos y Certificaciones</h2>
+            <!-- Courses -->
+            <section id="courses" class="section">
+                <h2><i class="fas fa-certificate"></i><span data-translate="section-courses">Courses & Certifications</span></h2>
                 <div class="courses-grid">
                     <div class="course-item">
                         <div class="course-title">Data Analyst Bootcamp</div>
-                        <div class="course-provider">TripleTen (Ago 2024 - Mar 2025)</div>
+                        <div class="course-provider">TripleTen (Aug 2024 - Mar 2025)</div>
                     </div>
                     <div class="course-item">
                         <div class="course-title">Introduction to Emerging Technologies</div>
                         <div class="course-provider">Emtech Institute of Santander</div>
                     </div>
                     <div class="course-item">
-                        <div class="course-title">Fundamentos del Cómputo en la Nube</div>
+                        <div class="course-title" data-translate="course3-title">Cloud Computing Fundamentals</div>
                         <div class="course-provider">2020</div>
                     </div>
                     <div class="course-item">
-                        <div class="course-title">Técnico en Redes de Datos</div>
+                        <div class="course-title" data-translate="course4-title">Data Networks Technician</div>
                         <div class="course-provider">2020</div>
                     </div>
                     <div class="course-item">
-                        <div class="course-title">Técnico en Informática</div>
+                        <div class="course-title" data-translate="course5-title">Computer Technician</div>
                         <div class="course-provider">2020</div>
                     </div>
                 </div>
             </section>
 
-            <!-- Idiomas -->
-            <section id="idiomas" class="section">
-                <h2><i class="fas fa-language"></i>Idiomas</h2>
+            <!-- Languages -->
+            <section id="languages" class="section">
+                <h2><i class="fas fa-language"></i><span data-translate="section-languages">Languages</span></h2>
                 <div class="language-item">
-                    <div class="language-name">Español</div>
-                    <div class="language-level">Nativo</div>
+                    <div class="language-name" data-translate="lang1-name">Spanish</div>
+                    <div class="language-level" data-translate="lang1-level">Native</div>
                 </div>
                 <div class="language-item">
-                    <div class="language-name">Inglés</div>
-                    <div class="language-level">Intermedio (B1)</div>
+                    <div class="language-name" data-translate="lang2-name">English</div>
+                    <div class="language-level" data-translate="lang2-level">Intermediate (B1)</div>
                 </div>
             </section>
         </main>
 
         <!-- Footer -->
         <footer class="footer">
-            <p>&copy; 2025 Pedro Fabián Gutiérrez Vidrio. Todos los derechos reservados.</p>
-            <p>Portafolio desarrollado para GitHub Pages</p>
+            <p data-translate="footer1">&copy; 2025 Pedro Fabián Gutiérrez Vidrio. All rights reserved.</p>
+            <p data-translate="footer2">Portfolio developed for GitHub Pages</p>
         </footer>
     </div>
 
     <script>
+        // Language translations
+        const translations = {
+            en: {
+                'subtitle': 'Data Analyst | Business Intelligence | Research & Analysis',
+                'nav-profile': 'Profile',
+                'nav-skills': 'Skills',
+                'nav-experience': 'Experience',
+                'nav-projects': 'Projects',
+                'nav-education': 'Education',
+                'nav-courses': 'Courses',
+                'nav-languages': 'Languages',
+                'section-profile': 'Professional Profile',
+                'profile-text1': 'Professional in Data Research and Analysis with background in social sciences and professional experience in IT systems. Specialist in quantitative and qualitative analysis, with advanced skills in statistical tools such as Python, SQL and specialized libraries (Pandas, Sci-kit learn).',
+                'profile-text2': 'Experience in data visualization using Plotly, Tableau and Matplotlib, and in technology systems management. Demonstrated ability to design research, process information with modern analytical tools (SQLAlchemy, SPSS) and communicate results effectively for strategic decision making.',
+                'section-skills': 'Technical Skills',
+                'skills-programming': 'Programming & Analysis',
+                'skills-visualization': 'Data Visualization',
+                'skills-dashboards': 'Interactive Dashboards',
+                'skills-kpis': 'KPIs & Metrics',
+                'skills-methodologies': 'Methodologies',
+                'skills-analysis': 'Quantitative & qualitative analysis',
+                'skills-predictive': 'Predictive models',
+                'skills-statistical': 'Advanced statistical analysis',
+                'skills-tools': 'Tools & Systems',
+                'skills-database': 'Database management',
+                'skills-network': 'Network administration',
+                'section-experience': 'Work Experience',
+                'job1-title': 'Data Analyst',
+                'job1-resp1': 'Developed 5 analytical projects applying advanced data science and machine learning methodologies',
+                'job1-resp2': 'Implemented predictive models using logistic regression and random forest to identify customer churn patterns',
+                'job1-resp3': 'Designed and executed A/B experiments to evaluate recommendation algorithms, improving data-driven decision making',
+                'job1-resp4': 'Developed interactive visualizations with Plotly, Dash and Matplotlib to communicate key findings to stakeholders',
+                'job1-resp5': 'Created complex SQL queries for bibliometric analysis, identifying significant correlations between business variables',
+                'job1-resp6': 'Developed a performance evaluation system using Python and advanced statistical techniques to optimize operational KPIs',
+                'job2-title': 'Voice & Data Technician',
+                'job2-company': 'National Electoral Institute',
+                'job2-resp1': 'Managed installation and configuration of critical communication systems, ensuring operability during electoral processes',
+                'job2-resp2': 'Resolved technical incidents in voice and data networks with an average response time of less than 2 hours',
+                'job2-resp3': 'Provided specialized technical support to more than 50 users, improving electoral staff productivity',
+                'job2-resp4': 'Participated in implementation and maintenance of network infrastructure for 2024 federal elections, ensuring 99.8% connectivity',
+                'job2-resp5': 'Collaborated in designing security protocols to protect electoral data integrity',
+                'job3-title': 'Managed Services Engineer',
+                'job3-resp1': 'Implemented monitoring solutions for technological infrastructure of multiple corporate clients',
+                'job3-resp2': 'Designed monthly dashboards using visualization tools to present critical KPIs to management',
+                'job3-resp3': 'Analyzed complex technical problems and developed optimized solutions through advanced SQL queries',
+                'job3-resp4': 'Documented technical processes and operational procedures, improving knowledge transfer by 40%',
+                'job3-resp5': 'Implemented database management improvements that increased operational efficiency by 15%',
+                'job4-title': 'Technical Support Manager',
+                'job4-company': 'Soriana Distribution Center',
+                'job4-resp1': 'Administered critical computer systems for distribution center operations processing over 10,000 products daily',
+                'job4-resp2': 'Developed periodic reports using analytical tools to support operational decision making',
+                'job4-resp3': 'Implemented preventive maintenance solutions that reduced technical incidents by 25%',
+                'job4-resp4': 'Managed operational databases and prepared analytical reports for regional logistics management',
+                'section-projects': 'Featured Technical Projects',
+                'project1-title': 'Model Fitness – Customer Retention Predictive Analysis',
+                'project1-desc': 'Developed a predictive model using logistic regression and random forest to identify customers at high risk of churn. Implemented feature engineering techniques with Python and Pandas, improving model accuracy by 15%. Designed a risk scoring system that enabled prioritized retention actions.',
+                'project2-title': 'Online Store – Recommendation System',
+                'project2-desc': 'Designed and implemented an A/B experiment to measure the impact of a new recommendation algorithm. Analyzed user interaction data with Seaborn, identifying statistically significant patterns. Findings supported implementation of the new system, resulting in an 18% increase in cross-sales.',
+                'project3-title': 'CallMeMaybe – Performance Evaluation',
+                'project3-desc': 'Implemented multidimensional analysis of telephone operator performance using Python, Numpy and Statmodels. Applied advanced statistical techniques to establish optimal performance thresholds and developed correlation models between customer satisfaction and operator performance metrics.',
+                'project4-title': 'Literary Service – Bibliometric Analysis',
+                'project4-desc': 'Developed complex SQL queries to extract reading preference patterns using SQLAlchemy and Pandas. Implemented a correlation model between user ratings and editorial characteristics. Created automated reports that increased user engagement by 22%.',
+                'section-education': 'Education',
+                'edu1-degree': 'PhD in Social Sciences',
+                'edu1-institution': 'University of Sonora (UNISON)',
+                'edu2-degree': "Master's in Educational Innovation",
+                'edu2-institution': 'University of Sonora (UNISON)',
+                'edu3-degree': "Bachelor's in Music",
+                'edu3-institution': 'University of Sonora (UNISON)',
+                'section-courses': 'Courses & Certifications',
+                'course3-title': 'Cloud Computing Fundamentals',
+                'course4-title': 'Data Networks Technician',
+                'course5-title': 'Computer Technician',
+                'section-languages': 'Languages',
+                'lang1-name': 'Spanish',
+                'lang1-level': 'Native',
+                'lang2-name': 'English',
+                'lang2-level': 'Intermediate (B1)',
+                'footer1': '© 2025 Pedro Fabián Gutiérrez Vidrio. All rights reserved.',
+                'footer2': 'Portfolio developed for GitHub Pages'
+            },
+            es: {
+                'subtitle': 'Analista de Datos | Business Intelligence | Investigación y Análisis',
+                'nav-profile': 'Perfil',
+                'nav-skills': 'Habilidades',
+                'nav-experience': 'Experiencia',
+                'nav-projects': 'Proyectos',
+                'nav-education': 'Educación',
+                'nav-courses': 'Cursos',
+                'nav-languages': 'Idiomas',
+                'section-profile': 'Perfil Profesional',
+                'profile-text1': 'Profesional en Investigación y Análisis de Datos con formación en ciencias sociales y experiencia profesional en sistemas de TI. Especialista en análisis cuantitativo y cualitativo, con habilidades avanzadas en herramientas estadísticas como Python, SQL y librerías especializadas (Pandas, Sci-kit learn).',
+                'profile-text2': 'Experiencia en visualización de datos utilizando Plotly, Tableau y Matplotlib, y en gestión de sistemas tecnológicos. Capacidad demostrada para diseñar investigaciones, procesar información con herramientas analíticas modernas (SQLAlchemy, SPSS) y comunicar resultados de manera efectiva para la toma de decisiones estratégicas.',
+                'section-skills': 'Habilidades Técnicas',
+                'skills-programming': 'Programación y Análisis',
+                'skills-visualization': 'Visualización de Datos',
+                'skills-dashboards': 'Dashboards interactivos',
+                'skills-kpis': 'KPIs y métricas',
+                'skills-methodologies': 'Metodologías',
+                'skills-analysis': 'Análisis cuantitativo y cualitativo',
+                'skills-predictive': 'Modelos predictivos',
+                'skills-statistical': 'Análisis estadístico avanzado',
+                'skills-tools': 'Herramientas y Sistemas',
+                'skills-database': 'Gestión de bases de datos',
+                'skills-network': 'Administración de redes',
+                'section-experience': 'Experiencia Laboral',
+                'job1-title': 'Analista de datos',
+                'job1-resp1': 'Desarrollé 5 proyectos analíticos aplicando metodologías avanzadas de ciencia de datos y machine learning',
+                'job1-resp2': 'Implementé modelos predictivos utilizando regresión logística y random forest para identificar patrones de abandono de clientes',
+                'job1-resp3': 'Diseñé y ejecuté experimentos A/B para evaluar algoritmos de recomendación, mejorando la toma de decisiones basada en datos',
+                'job1-resp4': 'Desarrollé visualizaciones interactivas con Plotly, Dash y Matplotlib para comunicar hallazgos clave a stakeholders',
+                'job1-resp5': 'Creé consultas SQL complejas para análisis bibliométricos, identificando correlaciones significativas entre variables de negocio',
+                'job1-resp6': 'Elaboré un sistema de evaluación de rendimiento utilizando Python y técnicas estadísticas avanzadas para optimizar KPIs operativos',
+                'job2-title': 'Técnico de voz y datos',
+                'job2-company': 'Instituto Nacional Electoral',
+                'job2-resp1': 'Gestioné la instalación y configuración de sistemas de comunicación críticos, garantizando la operatividad durante procesos electorales',
+                'job2-resp2': 'Resolví incidencias técnicas en redes de voz y datos con un tiempo de respuesta promedio de menos de 2 horas',
+                'job2-resp3': 'Brindé soporte técnico especializado a más de 50 usuarios, mejorando la productividad del personal electoral',
+                'job2-resp4': 'Participé en la implementación y mantenimiento de la infraestructura de red para las elecciones federales 2024, asegurando una conectividad del 99.8%',
+                'job2-resp5': 'Colaboré en el diseño de protocolos de seguridad para proteger la integridad de los datos electorales',
+                'job3-title': 'Ingeniero de Servicios Administrados',
+                'job3-resp1': 'Implementé soluciones de monitoreo para infraestructura tecnológica de múltiples clientes corporativos',
+                'job3-resp2': 'Diseñé dashboards mensuales utilizando herramientas de visualización para presentar KPIs críticos a la dirección',
+                'job3-resp3': 'Analicé problemas técnicos complejos y desarrollé soluciones optimizadas mediante consultas SQL avanzadas',
+                'job3-resp4': 'Documenté procesos técnicos y procedimientos operativos, mejorando la transferencia de conocimiento en un 40%',
+                'job3-resp5': 'Implementé mejoras en gestión de bases de datos que incrementaron la eficiencia operativa en un 15%',
+                'job4-title': 'Encargado de Soporte Técnico',
+                'job4-company': 'Centro de Distribución Soriana',
+                'job4-resp1': 'Administré sistemas informáticos críticos para la operación del centro de distribución que procesaba más de 10,000 productos diarios',
+                'job4-resp2': 'Desarrollé reportes periódicos utilizando herramientas analíticas para apoyar la toma de decisiones operativas',
+                'job4-resp3': 'Implementé soluciones de mantenimiento preventivo que redujeron las incidencias técnicas en un 25%',
+                'job4-resp4': 'Gestioné bases de datos operativas y elaboré informes analíticos para la dirección logística regional',
+                'section-projects': 'Proyectos Técnicos Destacados',
+                'project1-title': 'Model Fitness – Análisis Predictivo de Retención',
+                'project1-desc': 'Desarrollé un modelo predictivo utilizando regresión logística y random forest para identificar clientes con alto riesgo de abandono. Implementé técnicas de feature engineering con Python y Pandas, mejorando la precisión del modelo en un 15%. Diseñé un sistema de puntuación de riesgo que permitió priorizar acciones de retención.',
+                'project2-title': 'Tienda en Línea – Sistema de Recomendaciones',
+                'project2-desc': 'Diseñé e implementé un experimento A/B para medir el impacto de un nuevo algoritmo de recomendaciones. Analicé datos de interacción de usuarios con Seaborn, identificando patrones estadísticamente significativos. Los hallazgos fundamentaron la implementación del nuevo sistema, resultando en un incremento del 18% en ventas cruzadas.',
+                'project3-title': 'CallMeMaybe – Evaluación de Rendimiento',
+                'project3-desc': 'Implementé un análisis multidimensional del desempeño de operadores telefónicos utilizando Python, Numpy y Statmodels. Apliqué técnicas estadísticas avanzadas para establecer umbrales de rendimiento óptimo y desarrollé modelos de correlación entre satisfacción del cliente y métricas de desempeño.',
+                'project4-title': 'Servicio Literario – Análisis Bibliométrico',
+                'project4-desc': 'Desarrollé consultas SQL complejas para extraer patrones de preferencia de lectura utilizando SQLAlchemy y Pandas. Implementé un modelo de correlación entre calificaciones de usuarios y características editoriales. Creé informes automatizados que aumentaron el engagement en un 22%.',
+                'section-education': 'Educación',
+                'edu1-degree': 'Doctorado en Ciencias Sociales',
+                'edu1-institution': 'Universidad de Sonora (UNISON)',
+                'edu2-degree': 'Maestría en Innovación Educativa',
+                'edu2-institution': 'Universidad de Sonora (UNISON)',
+                'edu3-degree': 'Licenciatura en Música',
+                'edu3-institution': 'Universidad de Sonora (UNISON)',
+                'section-courses': 'Cursos y Certificaciones',
+                'course3-title': 'Fundamentos del Cómputo en la Nube',
+                'course4-title': 'Técnico en Redes de Datos',
+                'course5-title': 'Técnico en Informática',
+                'section-languages': 'Idiomas',
+                'lang1-name': 'Español',
+                'lang1-level': 'Nativo',
+                'lang2-name': 'Inglés',
+                'lang2-level': 'Intermedio (B1)',
+                'footer1': '© 2025 Pedro Fabián Gutiérrez Vidrio. Todos los derechos reservados.',
+                'footer2': 'Portafolio desarrollado para GitHub Pages'
+            }
+        };
+
+        // Current language
+        let currentLang = 'en';
+
+        // Function to change language
+        function changeLanguage(lang) {
+            currentLang = lang;
+            
+            // Update button states
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Add transition effect
+            document.body.classList.add('changing');
+            
+            // Update all translatable elements
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update navigation links href
+            const navLinks = document.querySelectorAll('.nav a');
+            const sectionIds = {
+                'en': ['profile', 'skills', 'experience', 'projects', 'education', 'courses', 'languages'],
+                'es': ['perfil', 'habilidades', 'experiencia', 'proyectos', 'educacion', 'cursos', 'idiomas']
+            };
+            
+            navLinks.forEach((link, index) => {
+                if (sectionIds[lang] && sectionIds[lang][index]) {
+                    link.href = '#' + sectionIds[lang][index];
+                }
+            });
+            
+            // Update section IDs
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                if (sectionIds[lang] && sectionIds[lang][index]) {
+                    section.id = sectionIds[lang][index];
+                }
+            });
+            
+            // Remove transition effect
+            setTimeout(() => {
+                document.body.classList.remove('changing');
+            }, 300);
+        }
+
         // Smooth scrolling for navigation links
-        document.querySelectorAll('.nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('.nav a')) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const targetId = e.target.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
                 }
-            });
+            }
         });
 
-        // Add active class to navigation items on scroll
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('.section');
-            const navLinks = document.querySelectorAll('.nav a');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                if (scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').slice(1) === current) {
-                    link.classList.add('active');
-                }
-            });
+        // Initialize page with English
+        document.addEventListener('DOMContentLoaded', function() {
+            changeLanguage('en');
         });
     </script>
 </body>
