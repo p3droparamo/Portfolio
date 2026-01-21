@@ -1,1360 +1,1285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedro Fabián Gutiérrez Vidrio - Data Analyst</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            box-shadow: 0 0 30px rgba(0,0,0,0.1);
-            min-height: 100vh;
-            position: relative;
-        }
-
-        /* Language Switch */
-        .language-switch {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
-            padding: 8px 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .language-switch button {
-            background: none;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-            color: #666;
-        }
-
-        .language-switch button.active {
-            background: #3498db;
-            color: white;
-        }
-
-        .language-switch button:hover:not(.active) {
-            background: #f0f0f0;
-            color: #3498db;
-        }
-
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.1;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 5px solid white;
-            margin: 0 auto 20px;
-            background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .profile-img img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 300;
-        }
-
-        .header .subtitle {
-            font-size: 1.4em;
-            margin-bottom: 15px;
-            opacity: 0.95;
-            font-weight: 500;
-        }
-
-        .impact-metrics {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin: 25px 0;
-            font-size: 0.95em;
-        }
-
-        .metric-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            opacity: 0.9;
-        }
-
-        .availability-banner {
-            background: rgba(52, 152, 219, 0.2);
-            padding: 10px 20px;
-            border-radius: 25px;
-            margin: 20px 0;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 25px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9em;
-        }
-
-        .contact-item i {
-            font-size: 1.2em;
-        }
-
-        .contact-item a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .contact-item a:hover {
-            opacity: 0.8;
-        }
-
-        /* Navigation */
-        .nav {
-            background: #34495e;
-            padding: 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .nav li {
-            margin: 0;
-        }
-
-        .nav a {
-            display: block;
-            padding: 15px 25px;
-            color: white;
-            text-decoration: none;
-            transition: background 0.3s;
-            border-bottom: 3px solid transparent;
-        }
-
-        .nav a:hover {
-            background: #2c3e50;
-            border-bottom-color: #3498db;
-        }
-
-        /* Main Content */
-        .main {
-            padding: 40px;
-        }
-
-        .section {
-            margin-bottom: 50px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s forwards;
-        }
-
-        .section:nth-child(2) { animation-delay: 0.1s; }
-        .section:nth-child(3) { animation-delay: 0.2s; }
-        .section:nth-child(4) { animation-delay: 0.3s; }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section h2 {
-            font-size: 2em;
-            margin-bottom: 25px;
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .section h2 i {
-            color: #3498db;
-        }
-
-        /* Hero Value Proposition */
-        .hero-value {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 40px;
-            text-align: center;
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
-        }
-
-        .hero-value h3 {
-            font-size: 1.6em;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .hero-value p {
-            font-size: 1.1em;
-            opacity: 0.95;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Quick Wins Section */
-        .quick-wins {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 40px;
-            border-left: 5px solid #27ae60;
-        }
-
-        .quick-wins h3 {
-            color: #2c3e50;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .wins-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .win-item {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #27ae60;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .win-metric {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: #27ae60;
-            margin-bottom: 5px;
-        }
-
-        .win-description {
-            color: #555;
-            font-size: 0.95em;
-        }
-
-        /* Skills Grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .skill-category {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 4px solid #3498db;
-        }
-
-        .skill-category h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
-            padding: 5px 0;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .skill-list li::before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: #3498db;
-            font-weight: bold;
-        }
-
-        /* Experience Cards */
-        .experience-card {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .experience-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-        }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .job-title {
-            color: #2c3e50;
-            font-size: 1.3em;
-            font-weight: 600;
-        }
-
-        .company {
-            color: #3498db;
-            font-weight: 500;
-        }
-
-        .date {
-            background: #ecf0f1;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.9em;
-            color: #7f8c8d;
-        }
-
-        .responsibilities {
-            list-style: none;
-            margin-top: 15px;
-        }
-
-        .responsibilities li {
-            padding: 5px 0;
-            position: relative;
-            padding-left: 25px;
-        }
-
-        .responsibilities li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #27ae60;
-            font-weight: bold;
-        }
-
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .project-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 10px;
-            padding: 25px;
-            border-left: 4px solid #3498db;
-            transition: transform 0.3s;
-            position: relative;
-        }
-
-        .project-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .project-title {
-            color: #2c3e50;
-            font-size: 1.2em;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .project-description {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .project-cta {
-            background: #3498db;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 500;
-            display: inline-block;
-            margin-top: 10px;
-        }
-
-        /* Education */
-        .education-item {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border-left: 4px solid #3498db;
-        }
-
-        .degree {
-            font-weight: 600;
-            color: #2c3e50;
-            font-size: 1.1em;
-        }
-
-        .institution {
-            color: #3498db;
-            margin: 5px 0;
-        }
-
-        .edu-date {
-            color: #7f8c8d;
-            font-size: 0.9em;
-        }
-
-        /* Courses */
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .course-item {
-            background: white;
-            border: 1px solid #e0e0e0;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            transition: box-shadow 0.3s;
-        }
-
-        .course-item:hover {
-            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-        }
-
-        .course-title {
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .course-provider {
-            color: #3498db;
-            font-size: 0.9em;
-        }
-
-        /* Languages */
-        .language-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .language-name {
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .language-level {
-            background: #3498db;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 0.9em;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .language-switch {
-                top: 10px;
-                right: 10px;
-                padding: 6px 12px;
-            }
-
-            .language-switch button {
-                padding: 6px 10px;
-                font-size: 0.8em;
-            }
-
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .header .subtitle {
-                font-size: 1.1em;
-            }
-
-            .impact-metrics {
-                gap: 20px;
-                font-size: 0.85em;
-            }
-
-            .wins-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .main {
-                padding: 20px;
-            }
-            
-            .contact-info {
-                gap: 15px;
-            }
-            
-            .contact-item {
-                font-size: 0.8em;
-            }
-            
-            .nav ul {
-                flex-direction: column;
-            }
-            
-            .experience-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-
-        /* Footer */
-        .footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
-        }
-
-        /* Loading transition */
-        .content-transition {
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
-
-        .content-transition.changing {
-            opacity: 0.7;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedro Fabián Gutiérrez Vidrio - Data Analyst</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body{
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+
+    .container{
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* ===== Language Switch (más visible) ===== */
+    .language-switch{
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 2000;
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.16);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .lang-btn{
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.92em;
+      letter-spacing: 0.2px;
+      color: #34495e;
+      background: #f2f4f7;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+      user-select: none;
+    }
+
+    .lang-btn i{ font-size: 0.95em; opacity: 0.9; }
+
+    .lang-btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      background: #e9eef6;
+    }
+
+    .lang-btn.active{
+      background: #3498db;
+      color: #fff;
+      box-shadow: 0 10px 18px rgba(52,152,219,0.35);
+    }
+
+    .lang-btn:focus{
+      outline: 3px solid rgba(52,152,219,0.35);
+      outline-offset: 2px;
+    }
+
+    /* Header */
+    .header{
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before{
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 0.12;
+    }
+
+    .header-content{ position: relative; z-index: 1; }
+
+    .profile-img{
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 5px solid white;
+      margin: 0 auto 20px;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .profile-img img{
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .header h1{
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      font-weight: 300;
+    }
+
+    .header .subtitle{
+      font-size: 1.4em;
+      margin-bottom: 15px;
+      opacity: 0.95;
+      font-weight: 500;
+    }
+
+    .impact-metrics{
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin: 25px 0;
+      font-size: 0.95em;
+    }
+
+    .metric-item{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.9;
+    }
+
+    .availability-banner{
+      background: rgba(52, 152, 219, 0.2);
+      padding: 10px 20px;
+      border-radius: 25px;
+      margin: 20px 0;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .contact-info{
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+    }
+
+    .contact-item{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9em;
+    }
+
+    .contact-item i{ font-size: 1.2em; }
+
+    .contact-item a{
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+    .contact-item a:hover{ opacity: 0.8; }
+
+    /* Navigation */
+    .nav{
+      background: #34495e;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav ul{
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .nav a{
+      display: block;
+      padding: 15px 25px;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s;
+      border-bottom: 3px solid transparent;
+    }
+
+    .nav a:hover{
+      background: #2c3e50;
+      border-bottom-color: #3498db;
+    }
+
+    /* Main Content */
+    .main{ padding: 40px; }
+
+    .section{
+      margin-bottom: 50px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s forwards;
+    }
+    .section:nth-child(2){ animation-delay: 0.1s; }
+    .section:nth-child(3){ animation-delay: 0.2s; }
+    .section:nth-child(4){ animation-delay: 0.3s; }
+
+    @keyframes fadeInUp{
+      to{ opacity: 1; transform: translateY(0); }
+    }
+
+    .section h2{
+      font-size: 2em;
+      margin-bottom: 25px;
+      color: #2c3e50;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .section h2 i{ color: #3498db; }
+
+    /* Hero Value Proposition */
+    .hero-value{
+      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+      color: white;
+      padding: 30px;
+      border-radius: 15px;
+      margin-bottom: 40px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+    }
+
+    .hero-value h3{
+      font-size: 1.6em;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .hero-value p{
+      font-size: 1.1em;
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Quick Wins Section */
+    .quick-wins{
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 40px;
+      border-left: 5px solid #27ae60;
+    }
+
+    .quick-wins h3{
+      color: #2c3e50;
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wins-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .win-item{
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      border-left: 4px solid #27ae60;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .win-metric{
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #27ae60;
+      margin-bottom: 5px;
+    }
+
+    .win-description{ color: #555; font-size: 0.95em; }
+
+    /* Skills Grid */
+    .skills-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .skill-category{
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 10px;
+      border-left: 4px solid #3498db;
+    }
+
+    .skill-category h3{
+      color: #2c3e50;
+      margin-bottom: 15px;
+      font-size: 1.3em;
+    }
+
+    .skill-list{ list-style: none; }
+    .skill-list li{
+      padding: 5px 0;
+      position: relative;
+      padding-left: 20px;
+    }
+    .skill-list li::before{
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #3498db;
+      font-weight: bold;
+    }
+
+    /* Experience Cards */
+    .experience-card{
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 30px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .experience-card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+
+    .experience-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .job-title{ color: #2c3e50; font-size: 1.3em; font-weight: 600; }
+    .company{ color: #3498db; font-weight: 500; }
+    .date{
+      background: #ecf0f1;
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.9em;
+      color: #7f8c8d;
+    }
+
+    .responsibilities{ list-style: none; margin-top: 15px; }
+    .responsibilities li{
+      padding: 5px 0;
+      position: relative;
+      padding-left: 25px;
+    }
+    .responsibilities li::before{
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #27ae60;
+      font-weight: bold;
+    }
+
+    /* Projects Grid */
+    .projects-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .project-card{
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 10px;
+      padding: 25px;
+      border-left: 4px solid #3498db;
+      transition: transform 0.3s;
+      position: relative;
+    }
+
+    .project-card:hover{ transform: translateY(-3px); }
+
+    .project-title{
+      color: #2c3e50;
+      font-size: 1.2em;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .project-description{
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .project-cta{
+      background: #3498db;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      font-weight: 500;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    /* Education */
+    .education-item{
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      border-left: 4px solid #3498db;
+    }
+
+    .degree{ font-weight: 600; color: #2c3e50; font-size: 1.1em; }
+    .institution{ color: #3498db; margin: 5px 0; }
+    .edu-date{ color: #7f8c8d; font-size: 0.9em; }
+
+    /* Languages */
+    .language-item{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .language-name{ font-weight: 600; color: #2c3e50; }
+
+    .language-level{
+      background: #3498db;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 15px;
+      font-size: 0.9em;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px){
+      .language-switch{ top: 10px; right: 10px; padding: 8px; gap: 8px; }
+      .lang-btn{ padding: 9px 12px; font-size: 0.85em; }
+      .header h1{ font-size: 2em; }
+      .header .subtitle{ font-size: 1.1em; }
+      .impact-metrics{ gap: 20px; font-size: 0.85em; }
+      .wins-grid{ grid-template-columns: 1fr; }
+      .main{ padding: 20px; }
+      .contact-info{ gap: 15px; }
+      .contact-item{ font-size: 0.8em; }
+      .nav ul{ flex-direction: column; }
+      .experience-header{ flex-direction: column; align-items: flex-start; }
+    }
+
+    /* Footer */
+    .footer{
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 50px;
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Language Switch -->
-    <div class="language-switch">
-        <button id="btn-en" class="active" onclick="changeLanguage('en')">EN</button>
-        <button id="btn-es" onclick="changeLanguage('es')">ES</button>
-    </div>
+  <!-- Language Switch -->
+  <div class="language-switch" role="group" aria-label="Language switch">
+    <button id="btn-en" class="lang-btn active" type="button" onclick="changeLanguage('en')" aria-pressed="true">
+      <i class="fa-solid fa-globe"></i> EN
+    </button>
+    <button id="btn-es" class="lang-btn" type="button" onclick="changeLanguage('es')" aria-pressed="false">
+      <i class="fa-solid fa-language"></i> ES
+    </button>
+  </div>
 
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <div class="profile-img">
-                    <img src="profile.jpg" alt="Pedro Fabián Gutiérrez Vidrio">
-                </div>
-                <h1>Pedro Fabián Gutiérrez Vidrio</h1>
-                <p class="subtitle" data-translate="subtitle">🚀 Data Analyst turning complex data into business growth</p>
-                
-                <div class="impact-metrics">
-                    <div class="metric-item">
-                        <i class="fas fa-chart-line"></i>
-                        <span data-translate="metric1">18% Sales Increase</span>
-                    </div>
-                    <div class="metric-item">
-                        <i class="fas fa-bullseye"></i>
-                        <span data-translate="metric2">99.8% System Uptime</span>
-                    </div>
-                    <div class="metric-item">
-                        <i class="fas fa-search"></i>
-                        <span data-translate="metric3">35% Faster EDA Process</span>
-                    </div>
-                </div>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="profile-img">
+          <!-- Importante: cache-busting + fallback -->
+          <img id="profilePhoto" src="profile.jpg?v=1" alt="Pedro Fabián Gutiérrez Vidrio">
+        </div>
 
-                <div class="availability-banner">
-                    <span data-translate="availability">🌍 Available for remote opportunities worldwide</span>
-                </div>
-                
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+52 (662) 358 0124</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <a href="mailto:contacto.pedrofabian@gmail.com">contacto.pedrofabian@gmail.com</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        <a href="https://www.linkedin.com/in/pedro-fabian-feed" target="_blank">LinkedIn</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-github"></i>
-                        <a href="https://github.com/p3droparamo" target="_blank">GitHub</a>
-                    </div>
-                </div>
+        <h1>Pedro Fabián Gutiérrez Vidrio</h1>
+        <p class="subtitle" data-translate="subtitle">🚀 Data Analyst turning complex data into business growth</p>
+
+        <div class="impact-metrics">
+          <div class="metric-item">
+            <i class="fas fa-chart-line"></i>
+            <span data-translate="metric1">18% Sales Increase</span>
+          </div>
+          <div class="metric-item">
+            <i class="fas fa-bullseye"></i>
+            <span data-translate="metric2">99.8% System Uptime</span>
+          </div>
+          <div class="metric-item">
+            <i class="fas fa-search"></i>
+            <span data-translate="metric3">35% Faster EDA Process</span>
+          </div>
+        </div>
+
+        <div class="availability-banner">
+          <span data-translate="availability">🌍 Available for remote opportunities worldwide</span>
+        </div>
+
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+52 (662) 358 0124</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:contacto.pedrofabian@gmail.com">contacto.pedrofabian@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <i class="fab fa-linkedin"></i>
+            <a href="https://www.linkedin.com/in/pedro-fabian-feed" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+          <div class="contact-item">
+            <i class="fab fa-github"></i>
+            <a href="https://github.com/p3droparamo" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation (IDs SIEMPRE iguales; no se cambian por idioma) -->
+    <nav class="nav">
+      <ul>
+        <li><a href="#value" data-translate="nav-value">Value</a></li>
+        <li><a href="#wins" data-translate="nav-wins">Quick Wins</a></li>
+        <li><a href="#profile" data-translate="nav-profile">Profile</a></li>
+        <li><a href="#skills" data-translate="nav-skills">Skills</a></li>
+        <li><a href="#competencies" data-translate="nav-competencies">Competencies</a></li>
+        <li><a href="#experience" data-translate="nav-experience">Experience</a></li>
+        <li><a href="#projects" data-translate="nav-projects">Projects</a></li>
+        <li><a href="#education" data-translate="nav-education">Education</a></li>
+        <li><a href="#languages" data-translate="nav-languages">Languages</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Hero Value Proposition -->
+      <section id="value" class="section">
+        <div class="hero-value">
+          <h3 data-translate="hero-title">🎯 I help businesses increase revenue by transforming raw data into actionable insights</h3>
+          <p data-translate="hero-desc">Specialized in customer behavior analysis, predictive modeling, and performance optimization that drive strategic decisions and measurable business growth.</p>
+        </div>
+      </section>
+
+      <!-- Quick Wins -->
+      <section id="wins" class="section">
+        <div class="quick-wins">
+          <h3><i class="fas fa-trophy"></i><span data-translate="wins-title">PROVEN BUSINESS IMPACT DELIVERED</span></h3>
+          <div class="wins-grid">
+            <div class="win-item">
+              <div class="win-metric">+18%</div>
+              <div class="win-description" data-translate="win1">Cross-sales increase through A/B Testing optimization</div>
             </div>
-        </header>
+            <div class="win-item">
+              <div class="win-metric">+15%</div>
+              <div class="win-description" data-translate="win2">Model accuracy improvement in customer retention</div>
+            </div>
+            <div class="win-item">
+              <div class="win-metric">99.8%</div>
+              <div class="win-description" data-translate="win3">System uptime during critical electoral infrastructure</div>
+            </div>
+            <div class="win-item">
+              <div class="win-metric">+40%</div>
+              <div class="win-description" data-translate="win4">Knowledge transfer improvement through documentation</div>
+            </div>
+            <div class="win-item">
+              <div class="win-metric">-25%</div>
+              <div class="win-description" data-translate="win5">Technical incidents reduction via preventive maintenance</div>
+            </div>
+            <div class="win-item">
+              <div class="win-metric">+22%</div>
+              <div class="win-description" data-translate="win6">User engagement increase through automated reports</div>
+            </div>
+            <div class="win-item">
+              <div class="win-metric">-35%</div>
+              <div class="win-description" data-translate="win7">Analysis time reduction through AI-assisted EDA processes</div>
+            </div>
+            <div class="win-item">
+              <div class="win-metric">100%</div>
+              <div class="win-description" data-translate="win8">Stakeholder satisfaction through clear data storytelling</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <!-- Navigation -->
-        <nav class="nav">
-            <ul>
-                <li><a href="#value" data-translate="nav-value">Value</a></li>
-                <li><a href="#wins" data-translate="nav-wins">Quick Wins</a></li>
-                <li><a href="#profile" data-translate="nav-profile">Profile</a></li>
-                <li><a href="#skills" data-translate="nav-skills">Skills</a></li>
-                <li><a href="#competencies" data-translate="nav-competencies">Competencies</a></li>
-                <li><a href="#experience" data-translate="nav-experience">Experience</a></li>
-                <li><a href="#projects" data-translate="nav-projects">Projects</a></li>
-                <li><a href="#education" data-translate="nav-education">Education</a></li>
-                <li><a href="#languages" data-translate="nav-languages">Languages</a></li>
+      <!-- Professional Profile -->
+      <section id="profile" class="section">
+        <h2><i class="fas fa-user-tie"></i><span data-translate="section-profile">Professional Profile</span></h2>
+        <p data-translate="profile-impact"><strong>💼 PROVEN IMPACT:</strong> Delivered 18% sales increase through A/B testing and 15% improvement in customer retention modeling for real business clients.</p>
+        <br>
+        <p data-translate="profile-unique"><strong>🎯 UNIQUE VALUE:</strong> Rare combination of PhD-level research skills + hands-on Python/SQL expertise + business intelligence acumen.</p>
+        <br>
+        <p data-translate="profile-text1">Professional in Data Research and Analysis with background in social sciences and professional experience in IT systems. Specialist in quantitative and qualitative analysis, with advanced skills in statistical tools such as Python, SQL and specialized libraries (Pandas, Sci-kit learn). Expert in EDA (Exploratory Data Analysis) and data cleaning processes that ensure high-quality insights.</p>
+        <br>
+        <p data-translate="profile-text2">Experience in data visualization using Plotly, Tableau and Matplotlib, and in technology systems management. Demonstrated ability to design research, process large datasets with big data technologies, and leverage AI-assisted analytics for enhanced productivity. Proven expertise in stakeholder communication, cross-functional collaboration, and translating complex technical findings into actionable business insights for strategic decision making.</p>
+      </section>
+
+      <!-- Technical Skills -->
+      <section id="skills" class="section">
+        <h2><i class="fas fa-cogs"></i><span data-translate="section-skills">Technical Skills</span></h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3 data-translate="skills-programming">Programming & Analysis</h3>
+            <ul class="skill-list">
+              <li>Python (Pandas, Sci-kit learn, NumPy)</li>
+              <li>SQL & SQLAlchemy</li>
+              <li>Jupyter Notebook</li>
+              <li>SPSS, Statmodels</li>
+              <li>Machine Learning</li>
+              <li data-translate="skills-eda">EDA (Exploratory Data Analysis)</li>
             </ul>
-        </nav>
+          </div>
+          <div class="skill-category">
+            <h3 data-translate="skills-visualization">Data Visualization</h3>
+            <ul class="skill-list">
+              <li>Plotly & Dash</li>
+              <li>Tableau</li>
+              <li>Matplotlib & Seaborn</li>
+              <li data-translate="skills-dashboards">Interactive Dashboards</li>
+              <li data-translate="skills-kpis">KPIs & Metrics</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3 data-translate="skills-methodologies">Methodologies</h3>
+            <ul class="skill-list">
+              <li data-translate="skills-analysis">Quantitative & qualitative analysis</li>
+              <li data-translate="skills-predictive">Predictive models</li>
+              <li>A/B Testing</li>
+              <li data-translate="skills-statistical">Advanced statistical analysis</li>
+              <li>Feature Engineering</li>
+              <li data-translate="skills-datacleaning">Data Cleaning & Quality Management</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3 data-translate="skills-tools">Tools & Systems</h3>
+            <ul class="skill-list">
+              <li>Git & GitHub</li>
+              <li>JIRA, Zendesk</li>
+              <li>INTERTEL</li>
+              <li data-translate="skills-database">Database management</li>
+              <li data-translate="skills-network">Network administration</li>
+              <li data-translate="skills-bigdata">Big Data Processing</li>
+              <li data-translate="skills-ai-assisted">AI-Assisted Analytics</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-        <!-- Main Content -->
-        <main class="main">
-            <!-- Hero Value Proposition -->
-            <section id="value" class="section">
-                <div class="hero-value">
-                    <h3 data-translate="hero-title">🎯 I help businesses increase revenue by transforming raw data into actionable insights</h3>
-                    <p data-translate="hero-desc">Specialized in customer behavior analysis, predictive modeling, and performance optimization that drive strategic decisions and measurable business growth.</p>
-                </div>
-            </section>
+      <!-- Professional Competencies -->
+      <section id="competencies" class="section">
+        <h2><i class="fas fa-users"></i><span data-translate="section-competencies">Professional Competencies</span></h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3 data-translate="comp-communication">Communication & Storytelling</h3>
+            <ul class="skill-list">
+              <li data-translate="comp-datastory">Data storytelling & narrative building</li>
+              <li data-translate="comp-presentation">Executive presentations & reporting</li>
+              <li data-translate="comp-technical">Technical documentation & writing</li>
+              <li data-translate="comp-visual">Visual communication of insights</li>
+              <li data-translate="comp-audience">Audience-tailored messaging</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3 data-translate="comp-collaboration">Collaboration & Leadership</h3>
+            <ul class="skill-list">
+              <li data-translate="comp-crossfunc">Cross-functional team collaboration</li>
+              <li data-translate="comp-stakeholder">Stakeholder management & alignment</li>
+              <li data-translate="comp-project">Project coordination & delivery</li>
+              <li data-translate="comp-mentoring">Knowledge transfer & mentoring</li>
+              <li data-translate="comp-consensus">Consensus building & negotiation</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3 data-translate="comp-thinking">Analytical & Critical Thinking</h3>
+            <ul class="skill-list">
+              <li data-translate="comp-problem">Complex problem decomposition</li>
+              <li data-translate="comp-hypothesis">Hypothesis-driven analysis</li>
+              <li data-translate="comp-business">Business acumen & strategic thinking</li>
+              <li data-translate="comp-decision">Data-driven decision framework</li>
+              <li data-translate="comp-quality">Quality assurance & validation</li>
+            </ul>
+          </div>
+          <div class="skill-category">
+            <h3 data-translate="comp-adaptability">Adaptability & Growth</h3>
+            <ul class="skill-list">
+              <li data-translate="comp-learning">Continuous learning & upskilling</li>
+              <li data-translate="comp-technology">Technology adaptation & innovation</li>
+              <li data-translate="comp-change">Change management & flexibility</li>
+              <li data-translate="comp-time">Time management & prioritization</li>
+              <li data-translate="comp-resilience">Resilience & stress management</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-            <!-- Quick Wins -->
-            <section id="wins" class="section">
-                <div class="quick-wins">
-                    <h3><i class="fas fa-trophy"></i><span data-translate="wins-title">PROVEN BUSINESS IMPACT DELIVERED</span></h3>
-                    <div class="wins-grid">
-                        <div class="win-item">
-                            <div class="win-metric">+18%</div>
-                            <div class="win-description" data-translate="win1">Cross-sales increase through A/B Testing optimization</div>
-                        </div>
-                        <div class="win-item">
-                            <div class="win-metric">+15%</div>
-                            <div class="win-description" data-translate="win2">Model accuracy improvement in customer retention</div>
-                        </div>
-                        <div class="win-item">
-                            <div class="win-metric">99.8%</div>
-                            <div class="win-description" data-translate="win3">System uptime during critical electoral infrastructure</div>
-                        </div>
-                        <div class="win-item">
-                            <div class="win-metric">+40%</div>
-                            <div class="win-description" data-translate="win4">Knowledge transfer improvement through documentation</div>
-                        </div>
-                        <div class="win-item">
-                            <div class="win-metric">-25%</div>
-                            <div class="win-description" data-translate="win5">Technical incidents reduction via preventive maintenance</div>
-                        </div>
-                        <div class="win-item">
-                            <div class="win-metric">+22%</div>
-                            <div class="win-description" data-translate="win6">User engagement increase through automated reports</div>
-                        </div>
-                        <div class="win-item">
-                            <div class="win-metric">-35%</div>
-                            <div class="win-description" data-translate="win7">Analysis time reduction through AI-assisted EDA processes</div>
-                        </div>
-                        <div class="win-item">
-                            <div class="win-metric">100%</div>
-                            <div class="win-description" data-translate="win8">Stakeholder satisfaction through clear data storytelling</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+      <!-- Work Experience -->
+      <section id="experience" class="section">
+        <h2><i class="fas fa-briefcase"></i><span data-translate="section-experience">Work Experience</span></h2>
 
-            <!-- Professional Profile -->
-            <section id="profile" class="section">
-                <h2><i class="fas fa-user-tie"></i><span data-translate="section-profile">Professional Profile</span></h2>
-                <p data-translate="profile-impact"><strong>💼 PROVEN IMPACT:</strong> Delivered 18% sales increase through A/B testing and 15% improvement in customer retention modeling for real business clients.</p>
-                <br>
-                <p data-translate="profile-unique"><strong>🎯 UNIQUE VALUE:</strong> Rare combination of PhD-level research skills + hands-on Python/SQL expertise + business intelligence acumen.</p>
-                <br>
-                <p data-translate="profile-text1">Professional in Data Research and Analysis with background in social sciences and professional experience in IT systems. Specialist in quantitative and qualitative analysis, with advanced skills in statistical tools such as Python, SQL and specialized libraries (Pandas, Sci-kit learn). Expert in EDA (Exploratory Data Analysis) and data cleaning processes that ensure high-quality insights.</p>
-                <br>
-                <p data-translate="profile-text2">Experience in data visualization using Plotly, Tableau and Matplotlib, and in technology systems management. Demonstrated ability to design research, process large datasets with big data technologies, and leverage AI-assisted analytics for enhanced productivity. Proven expertise in stakeholder communication, cross-functional collaboration, and translating complex technical findings into actionable business insights for strategic decision making.</p>
-            </section>
+        <div class="experience-card">
+          <div class="experience-header">
+            <div>
+              <div class="job-title" data-translate="job1-title">Data Analyst</div>
+              <div class="company">Practicum Bootcamp | TripleTen</div>
+            </div>
+            <div class="date">08/2024 - 03/2025</div>
+          </div>
+          <ul class="responsibilities">
+            <li data-translate="job1-resp1">Developed 5 analytical projects applying advanced data science and machine learning methodologies</li>
+            <li data-translate="job1-resp2">Implemented predictive models using logistic regression and random forest to identify customer churn patterns</li>
+            <li data-translate="job1-resp3">Designed and executed A/B experiments to evaluate recommendation algorithms, improving data-driven decision making</li>
+            <li data-translate="job1-resp4">Developed interactive visualizations with Plotly, Dash and Matplotlib to communicate key findings to stakeholders</li>
+            <li data-translate="job1-resp5">Created complex SQL queries for bibliometric analysis, identifying significant correlations between business variables</li>
+            <li data-translate="job1-resp6">Developed a performance evaluation system using Python and advanced statistical techniques to optimize operational KPIs</li>
+            <li data-translate="job1-resp7">Conducted comprehensive EDA processes and implemented data cleaning protocols, ensuring high-quality datasets for analysis and modeling</li>
+            <li data-translate="job1-resp8">Led cross-functional collaboration with stakeholders to translate business requirements into analytical solutions, improving decision-making processes across multiple departments</li>
+          </ul>
+        </div>
 
-            <!-- Technical Skills -->
-            <section id="skills" class="section">
-                <h2><i class="fas fa-cogs"></i><span data-translate="section-skills">Technical Skills</span></h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3 data-translate="skills-programming">Programming & Analysis</h3>
-                        <ul class="skill-list">
-                            <li>Python (Pandas, Sci-kit learn, NumPy)</li>
-                            <li>SQL & SQLAlchemy</li>
-                            <li>Jupyter Notebook</li>
-                            <li>SPSS, Statmodels</li>
-                            <li>Machine Learning</li>
-                            <li data-translate="skills-eda">EDA (Exploratory Data Analysis)</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3 data-translate="skills-visualization">Data Visualization</h3>
-                        <ul class="skill-list">
-                            <li>Plotly & Dash</li>
-                            <li>Tableau</li>
-                            <li>Matplotlib & Seaborn</li>
-                            <li data-translate="skills-dashboards">Interactive Dashboards</li>
-                            <li data-translate="skills-kpis">KPIs & Metrics</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3 data-translate="skills-methodologies">Methodologies</h3>
-                        <ul class="skill-list">
-                            <li data-translate="skills-analysis">Quantitative & qualitative analysis</li>
-                            <li data-translate="skills-predictive">Predictive models</li>
-                            <li>A/B Testing</li>
-                            <li data-translate="skills-statistical">Advanced statistical analysis</li>
-                            <li>Feature Engineering</li>
-                            <li data-translate="skills-datacleaning">Data Cleaning & Quality Management</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3 data-translate="skills-tools">Tools & Systems</h3>
-                        <ul class="skill-list">
-                            <li>Git & GitHub</li>
-                            <li>JIRA, Zendesk</li>
-                            <li>INTERTEL</li>
-                            <li data-translate="skills-database">Database management</li>
-                            <li data-translate="skills-network">Network administration</li>
-                            <li data-translate="skills-bigdata">Big Data Processing</li>
-                            <li data-translate="skills-ai-assisted">AI-Assisted Analytics</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
+        <div class="experience-card">
+          <div class="experience-header">
+            <div>
+              <div class="job-title" data-translate="job2-title">Voice & Data Technician</div>
+              <div class="company" data-translate="job2-company">National Electoral Institute</div>
+            </div>
+            <div class="date">01/2024 – 07/2024</div>
+          </div>
+          <ul class="responsibilities">
+            <li data-translate="job2-resp1">Managed installation and configuration of critical communication systems, ensuring operability during electoral processes</li>
+            <li data-translate="job2-resp2">Resolved technical incidents in voice and data networks with an average response time of less than 2 hours</li>
+            <li data-translate="job2-resp3">Provided specialized technical support to more than 50 users, improving electoral staff productivity</li>
+            <li data-translate="job2-resp4">Participated in implementation and maintenance of network infrastructure for 2024 federal elections, ensuring 99.8% connectivity</li>
+            <li data-translate="job2-resp5">Collaborated in designing security protocols to protect electoral data integrity</li>
+          </ul>
+        </div>
 
-            <!-- Professional Competencies -->
-            <section id="competencies" class="section">
-                <h2><i class="fas fa-users"></i><span data-translate="section-competencies">Professional Competencies</span></h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3 data-translate="comp-communication">Communication & Storytelling</h3>
-                        <ul class="skill-list">
-                            <li data-translate="comp-datastory">Data storytelling & narrative building</li>
-                            <li data-translate="comp-presentation">Executive presentations & reporting</li>
-                            <li data-translate="comp-technical">Technical documentation & writing</li>
-                            <li data-translate="comp-visual">Visual communication of insights</li>
-                            <li data-translate="comp-audience">Audience-tailored messaging</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3 data-translate="comp-collaboration">Collaboration & Leadership</h3>
-                        <ul class="skill-list">
-                            <li data-translate="comp-crossfunc">Cross-functional team collaboration</li>
-                            <li data-translate="comp-stakeholder">Stakeholder management & alignment</li>
-                            <li data-translate="comp-project">Project coordination & delivery</li>
-                            <li data-translate="comp-mentoring">Knowledge transfer & mentoring</li>
-                            <li data-translate="comp-consensus">Consensus building & negotiation</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3 data-translate="comp-thinking">Analytical & Critical Thinking</h3>
-                        <ul class="skill-list">
-                            <li data-translate="comp-problem">Complex problem decomposition</li>
-                            <li data-translate="comp-hypothesis">Hypothesis-driven analysis</li>
-                            <li data-translate="comp-business">Business acumen & strategic thinking</li>
-                            <li data-translate="comp-decision">Data-driven decision framework</li>
-                            <li data-translate="comp-quality">Quality assurance & validation</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h3 data-translate="comp-adaptability">Adaptability & Growth</h3>
-                        <ul class="skill-list">
-                            <li data-translate="comp-learning">Continuous learning & upskilling</li>
-                            <li data-translate="comp-technology">Technology adaptation & innovation</li>
-                            <li data-translate="comp-change">Change management & flexibility</li>
-                            <li data-translate="comp-time">Time management & prioritization</li>
-                            <li data-translate="comp-resilience">Resilience & stress management</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
+        <div class="experience-card">
+          <div class="experience-header">
+            <div>
+              <div class="job-title" data-translate="job3-title">Managed Services Engineer</div>
+              <div class="company">INTERSEL</div>
+            </div>
+            <div class="date">10/2021 - 11/2023</div>
+          </div>
+          <ul class="responsibilities">
+            <li data-translate="job3-resp1">Implemented monitoring solutions for technological infrastructure of multiple corporate clients</li>
+            <li data-translate="job3-resp2">Designed monthly dashboards using visualization tools to present critical KPIs to management</li>
+            <li data-translate="job3-resp3">Analyzed complex technical problems and developed optimized solutions through advanced SQL queries</li>
+            <li data-translate="job3-resp4">Documented technical processes and operational procedures, improving knowledge transfer by 40%</li>
+            <li data-translate="job3-resp5">Implemented database management improvements that increased operational efficiency by 15%</li>
+          </ul>
+        </div>
 
-            <!-- Work Experience -->
-            <section id="experience" class="section">
-                <h2><i class="fas fa-briefcase"></i><span data-translate="section-experience">Work Experience</span></h2>
-                
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <div>
-                            <div class="job-title" data-translate="job1-title">Data Analyst</div>
-                            <div class="company">Practicum Bootcamp | TripleTen</div>
-                        </div>
-                        <div class="date">08/2024 - 03/2025</div>
-                    </div>
-                    <ul class="responsibilities">
-                        <li data-translate="job1-resp1">Developed 5 analytical projects applying advanced data science and machine learning methodologies</li>
-                        <li data-translate="job1-resp2">Implemented predictive models using logistic regression and random forest to identify customer churn patterns</li>
-                        <li data-translate="job1-resp3">Designed and executed A/B experiments to evaluate recommendation algorithms, improving data-driven decision making</li>
-                        <li data-translate="job1-resp4">Developed interactive visualizations with Plotly, Dash and Matplotlib to communicate key findings to stakeholders</li>
-                        <li data-translate="job1-resp5">Created complex SQL queries for bibliometric analysis, identifying significant correlations between business variables</li>
-                        <li data-translate="job1-resp6">Developed a performance evaluation system using Python and advanced statistical techniques to optimize operational KPIs</li>
-                        <li data-translate="job1-resp7">Conducted comprehensive EDA processes and implemented data cleaning protocols, ensuring high-quality datasets for analysis and modeling</li>
-                        <li data-translate="job1-resp8">Led cross-functional collaboration with stakeholders to translate business requirements into analytical solutions, improving decision-making processes across multiple departments</li>
-                    </ul>
-                </div>
+        <div class="experience-card">
+          <div class="experience-header">
+            <div>
+              <div class="job-title" data-translate="job4-title">Technical Support Manager</div>
+              <div class="company" data-translate="job4-company">Soriana Distribution Center</div>
+            </div>
+            <div class="date">06/2019 - 07/2021</div>
+          </div>
+          <ul class="responsibilities">
+            <li data-translate="job4-resp1">Administered critical computer systems for distribution center operations processing over 10,000 products daily</li>
+            <li data-translate="job4-resp2">Developed periodic reports using analytical tools to support operational decision making</li>
+            <li data-translate="job4-resp3">Implemented preventive maintenance solutions that reduced technical incidents by 25%</li>
+            <li data-translate="job4-resp4">Managed operational databases and prepared analytical reports for regional logistics management</li>
+          </ul>
+        </div>
+      </section>
 
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <div>
-                            <div class="job-title" data-translate="job2-title">Voice & Data Technician</div>
-                            <div class="company" data-translate="job2-company">National Electoral Institute</div>
-                        </div>
-                        <div class="date">01/2024 – 07/2024</div>
-                    </div>
-                    <ul class="responsibilities">
-                        <li data-translate="job2-resp1">Managed installation and configuration of critical communication systems, ensuring operability during electoral processes</li>
-                        <li data-translate="job2-resp2">Resolved technical incidents in voice and data networks with an average response time of less than 2 hours</li>
-                        <li data-translate="job2-resp3">Provided specialized technical support to more than 50 users, improving electoral staff productivity</li>
-                        <li data-translate="job2-resp4">Participated in implementation and maintenance of network infrastructure for 2024 federal elections, ensuring 99.8% connectivity</li>
-                        <li data-translate="job2-resp5">Collaborated in designing security protocols to protect electoral data integrity</li>
-                    </ul>
-                </div>
+      <!-- Featured Projects -->
+      <section id="projects" class="section">
+        <h2><i class="fas fa-project-diagram"></i><span data-translate="section-projects">Featured Technical Projects</span></h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-title" data-translate="project1-title">Model Fitness – Customer Retention Predictive Analysis</div>
+            <div class="project-description" data-translate="project1-desc">
+              Developed a predictive model using logistic regression and random forest to identify customers at high risk of churn. Implemented feature engineering techniques with Python and Pandas, improving model accuracy by 15%. Designed a risk scoring system that enabled prioritized retention actions.
+            </div>
+            <div class="project-cta" data-translate="project-cta">💡 Want similar results for your business? Let's discuss how.</div>
+          </div>
 
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <div>
-                            <div class="job-title" data-translate="job3-title">Managed Services Engineer</div>
-                            <div class="company">INTERSEL</div>
-                        </div>
-                        <div class="date">10/2021 - 11/2023</div>
-                    </div>
-                    <ul class="responsibilities">
-                        <li data-translate="job3-resp1">Implemented monitoring solutions for technological infrastructure of multiple corporate clients</li>
-                        <li data-translate="job3-resp2">Designed monthly dashboards using visualization tools to present critical KPIs to management</li>
-                        <li data-translate="job3-resp3">Analyzed complex technical problems and developed optimized solutions through advanced SQL queries</li>
-                        <li data-translate="job3-resp4">Documented technical processes and operational procedures, improving knowledge transfer by 40%</li>
-                        <li data-translate="job3-resp5">Implemented database management improvements that increased operational efficiency by 15%</li>
-                    </ul>
-                </div>
+          <div class="project-card">
+            <div class="project-title" data-translate="project2-title">Online Store – Recommendation System</div>
+            <div class="project-description" data-translate="project2-desc">
+              Designed and implemented an A/B experiment to measure the impact of a new recommendation algorithm. Analyzed user interaction data with Seaborn, identifying statistically significant patterns. Findings supported implementation of the new system, resulting in an 18% increase in cross-sales.
+            </div>
+            <div class="project-cta" data-translate="project-cta">💡 Want similar results for your business? Let's discuss how.</div>
+          </div>
 
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <div>
-                            <div class="job-title" data-translate="job4-title">Technical Support Manager</div>
-                            <div class="company" data-translate="job4-company">Soriana Distribution Center</div>
-                        </div>
-                        <div class="date">06/2019 - 07/2021</div>
-                    </div>
-                    <ul class="responsibilities">
-                        <li data-translate="job4-resp1">Administered critical computer systems for distribution center operations processing over 10,000 products daily</li>
-                        <li data-translate="job4-resp2">Developed periodic reports using analytical tools to support operational decision making</li>
-                        <li data-translate="job4-resp3">Implemented preventive maintenance solutions that reduced technical incidents by 25%</li>
-                        <li data-translate="job4-resp4">Managed operational databases and prepared analytical reports for regional logistics management</li>
-                    </ul>
-                </div>
-            </section>
+          <div class="project-card">
+            <div class="project-title" data-translate="project3-title">CallMeMaybe – Performance Evaluation</div>
+            <div class="project-description" data-translate="project3-desc">
+              Implemented multidimensional analysis of telephone operator performance using Python, Numpy and Statmodels. Applied advanced statistical techniques to establish optimal performance thresholds and developed correlation models between customer satisfaction and operator performance metrics.
+            </div>
+            <div class="project-cta" data-translate="project-cta">💡 Want similar results for your business? Let's discuss how.</div>
+          </div>
 
-            <!-- Featured Projects -->
-            <section id="projects" class="section">
-                <h2><i class="fas fa-project-diagram"></i><span data-translate="section-projects">Featured Technical Projects</span></h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-title" data-translate="project1-title">Model Fitness – Customer Retention Predictive Analysis</div>
-                        <div class="project-description" data-translate="project1-desc">
-                            Developed a predictive model using logistic regression and random forest to identify customers at high risk of churn. Implemented feature engineering techniques with Python and Pandas, improving model accuracy by 15%. Designed a risk scoring system that enabled prioritized retention actions.
-                        </div>
-                        <div class="project-cta" data-translate="project-cta">💡 Want similar results for your business? Let's discuss how.</div>
-                    </div>
+          <div class="project-card">
+            <div class="project-title" data-translate="project4-title">Literary Service – Bibliometric Analysis</div>
+            <div class="project-description" data-translate="project4-desc">
+              Developed complex SQL queries to extract reading preference patterns using SQLAlchemy and Pandas. Implemented a correlation model between user ratings and editorial characteristics. Created automated reports that increased user engagement by 22%.
+            </div>
+            <div class="project-cta" data-translate="project-cta">💡 Want similar results for your business? Let's discuss how.</div>
+          </div>
 
-                    <div class="project-card">
-                        <div class="project-title" data-translate="project2-title">Online Store – Recommendation System</div>
-                        <div class="project-description" data-translate="project2-desc">
-                            Designed and implemented an A/B experiment to measure the impact of a new recommendation algorithm. Analyzed user interaction data with Seaborn, identifying statistically significant patterns. Findings supported implementation of the new system, resulting in an 18% increase in cross-sales.
-                        </div>
-                        <div class="project-cta" data-translate="project-cta">💡 Want similar results for your business? Let's discuss how.</div>
-                    </div>
+          <div class="project-card">
+            <div class="project-title" data-translate="project5-title">Advanced EDA & Data Quality Framework</div>
+            <div class="project-description" data-translate="project5-desc">
+              Developed comprehensive EDA methodologies and data cleaning frameworks for large-scale datasets. Implemented automated quality checks, outlier detection algorithms, and missing value treatment protocols. Leveraged AI-assisted analytics to accelerate data exploration processes, reducing analysis time by 35% while improving data quality standards.
+            </div>
+            <div class="project-cta" data-translate="project-cta">💡 Want similar results for your business? Let's discuss how.</div>
+          </div>
+        </div>
+      </section>
 
-                    <div class="project-card">
-                        <div class="project-title" data-translate="project3-title">CallMeMaybe – Performance Evaluation</div>
-                        <div class="project-description" data-translate="project3-desc">
-                            Implemented multidimensional analysis of telephone operator performance using Python, Numpy and Statmodels. Applied advanced statistical techniques to establish optimal performance thresholds and developed correlation models between customer satisfaction and operator performance metrics.
-                        </div>
-                        <div class="project-cta" data-translate="project-cta">💡 Want similar results for your business? Let's discuss how.</div>
-                    </div>
+      <!-- Education -->
+      <section id="education" class="section">
+        <h2><i class="fas fa-graduation-cap"></i><span data-translate="section-education">Education & Certifications</span></h2>
 
-                    <div class="project-card">
-                        <div class="project-title" data-translate="project4-title">Literary Service – Bibliometric Analysis</div>
-                        <div class="project-description" data-translate="project4-desc">
-                            Developed complex SQL queries to extract reading preference patterns using SQLAlchemy and Pandas. Implemented a correlation model between user ratings and editorial characteristics. Created automated reports that increased user engagement by 22%.
-                        </div>
-                        <div class="project-cta" data-translate="project-cta">💡 Want similar results for your business? Let's discuss how.</div>
-                    </div>
+        <div class="education-item">
+          <div class="degree" data-translate="edu1-degree">PhD in Social Sciences</div>
+          <div class="institution" data-translate="edu1-institution">University of Sonora (UNISON)</div>
+          <div class="edu-date">August 2022 - May 2025</div>
+        </div>
 
-                    <div class="project-card">
-                        <div class="project-title" data-translate="project5-title">Advanced EDA & Data Quality Framework</div>
-                        <div class="project-description" data-translate="project5-desc">
-                            Developed comprehensive EDA methodologies and data cleaning frameworks for large-scale datasets. Implemented automated quality checks, outlier detection algorithms, and missing value treatment protocols. Leveraged AI-assisted analytics to accelerate data exploration processes, reducing analysis time by 35% while improving data quality standards.
-                        </div>
-                        <div class="project-cta" data-translate="project-cta">💡 Want similar results for your business? Let's discuss how.</div>
-                    </div>
-                </div>
-            </section>
+        <div class="education-item">
+          <div class="degree" data-translate="edu2-degree">Master's in Educational Innovation</div>
+          <div class="institution" data-translate="edu2-institution">University of Sonora (UNISON)</div>
+          <div class="edu-date">August 2019 - May 2021</div>
+        </div>
 
-            <!-- Education -->
-            <section id="education" class="section">
-                <h2><i class="fas fa-graduation-cap"></i><span data-translate="section-education">Education & Certifications</span></h2>
-                
-                <div class="education-item">
-                    <div class="degree" data-translate="edu1-degree">PhD in Social Sciences</div>
-                    <div class="institution" data-translate="edu1-institution">University of Sonora (UNISON)</div>
-                    <div class="edu-date">August 2022 - May 2025</div>
-                </div>
+        <div class="education-item">
+          <div class="degree">Data Analyst Bootcamp</div>
+          <div class="institution">TripleTen</div>
+          <div class="edu-date">August 2024 - March 2025</div>
+        </div>
 
-                <div class="education-item">
-                    <div class="degree" data-translate="edu2-degree">Master's in Educational Innovation</div>
-                    <div class="institution" data-translate="edu2-institution">University of Sonora (UNISON)</div>
-                    <div class="edu-date">August 2019 - May 2021</div>
-                </div>
+        <div class="education-item">
+          <div class="degree" data-translate="edu3-degree">Bachelor's in Music</div>
+          <div class="institution" data-translate="edu3-institution">University of Sonora (UNISON)</div>
+          <div class="edu-date">August 2014 - May 2018</div>
+        </div>
+      </section>
 
-                <div class="education-item">
-                    <div class="degree">Data Analyst Bootcamp</div>
-                    <div class="institution">TripleTen</div>
-                    <div class="edu-date">August 2024 - March 2025</div>
-                </div>
+      <!-- Languages -->
+      <section id="languages" class="section">
+        <h2><i class="fas fa-language"></i><span data-translate="section-languages">Languages</span></h2>
+        <div class="language-item">
+          <div class="language-name" data-translate="lang1-name">Spanish</div>
+          <div class="language-level" data-translate="lang1-level">Native</div>
+        </div>
+        <div class="language-item">
+          <div class="language-name" data-translate="lang2-name">English</div>
+          <div class="language-level" data-translate="lang2-level">Upper-Intermediate to Advanced (B2+/C1)</div>
+        </div>
+      </section>
+    </main>
 
-                <div class="education-item">
-                    <div class="degree" data-translate="edu3-degree">Bachelor's in Music</div>
-                    <div class="institution" data-translate="edu3-institution">University of Sonora (UNISON)</div>
-                    <div class="edu-date">August 2014 - May 2018</div>
-                </div>
-            </section>
+    <!-- Footer -->
+    <footer class="footer">
+      <p data-translate="footer1">&copy; 2025 Pedro Fabián Gutiérrez Vidrio. All rights reserved.</p>
+      <p data-translate="footer2">Let's connect and transform data into actionable insights</p>
+    </footer>
+  </div>
 
-            <!-- Languages -->
-            <section id="languages" class="section">
-                <h2><i class="fas fa-language"></i><span data-translate="section-languages">Languages</span></h2>
-                <div class="language-item">
-                    <div class="language-name" data-translate="lang1-name">Spanish</div>
-                    <div class="language-level" data-translate="lang1-level">Native</div>
-                </div>
-                <div class="language-item">
-                    <div class="language-name" data-translate="lang2-name">English</div>
-                    <div class="language-level" data-translate="lang2-level">Upper-Intermediate to Advanced (B2+/C1)</div>
-                </div>
-            </section>
-        </main>
+  <script>
+    // ===== Photo fallback (profile.jpg / profile.jpeg / profile.png) + cache-bust =====
+    (function initProfilePhoto(){
+      const img = document.getElementById('profilePhoto');
+      if(!img) return;
 
-        <!-- Footer -->
-        <footer class="footer">
-            <p data-translate="footer1">&copy; 2025 Pedro Fabián Gutiérrez Vidrio. All rights reserved.</p>
-            <p data-translate="footer2">Let's connect and transform data into actionable insights</p>
-        </footer>
-    </div>
+      const candidates = [
+        'profile.jpg',
+        'profile.jpeg',
+        'profile.png'
+      ];
 
-    <script>
-        // Language translations
-        const translations = {
-            en: {
-                'subtitle': '🚀 Data Analyst turning complex data into business growth',
-                'metric1': '18% Sales Increase',
-                'metric2': '99.8% System Uptime',
-                'metric3': '35% Faster EDA Process',
-                'availability': '🌍 Available for remote opportunities worldwide',
-                'nav-value': 'Value',
-                'nav-wins': 'Quick Wins',
-                'nav-profile': 'Profile',
-                'nav-skills': 'Skills',
-                'nav-competencies': 'Competencies',
-                'nav-experience': 'Experience',
-                'nav-projects': 'Projects',
-                'nav-education': 'Education',
-                'nav-languages': 'Languages',
-                'hero-title': '🎯 I help businesses increase revenue by transforming raw data into actionable insights',
-                'hero-desc': 'Specialized in customer behavior analysis, predictive modeling, and performance optimization that drive strategic decisions and measurable business growth.',
-                'wins-title': 'PROVEN BUSINESS IMPACT DELIVERED',
-                'win1': 'Cross-sales increase through A/B Testing optimization',
-                'win2': 'Model accuracy improvement in customer retention',
-                'win3': 'System uptime during critical electoral infrastructure',
-                'win4': 'Knowledge transfer improvement through documentation',
-                'win5': 'Technical incidents reduction via preventive maintenance',
-                'win6': 'User engagement increase through automated reports',
-                'win7': 'Analysis time reduction through AI-assisted EDA processes',
-                'win8': 'Stakeholder satisfaction through clear data storytelling',
-                'section-profile': 'Professional Profile',
-                'profile-impact': '💼 PROVEN IMPACT: Delivered 18% sales increase through A/B testing and 15% improvement in customer retention modeling for real business clients.',
-                'profile-unique': '🎯 UNIQUE VALUE: Rare combination of PhD-level research skills + hands-on Python/SQL expertise + business intelligence acumen.',
-                'profile-text1': 'Professional in Data Research and Analysis with background in social sciences and professional experience in IT systems. Specialist in quantitative and qualitative analysis, with advanced skills in statistical tools such as Python, SQL and specialized libraries (Pandas, Sci-kit learn).',
-                'profile-text2': 'Experience in data visualization using Plotly, Tableau and Matplotlib, and in technology systems management. Demonstrated ability to design research, process information with modern analytical tools (SQLAlchemy, SPSS) and communicate results effectively for strategic decision making.',
-                'section-skills': 'Technical Skills',
-                'skills-programming': 'Programming & Analysis',
-                'skills-visualization': 'Data Visualization',
-                'skills-dashboards': 'Interactive Dashboards',
-                'skills-kpis': 'KPIs & Metrics',
-                'skills-methodologies': 'Methodologies',
-                'skills-analysis': 'Quantitative & qualitative analysis',
-                'skills-predictive': 'Predictive models',
-                'skills-statistical': 'Advanced statistical analysis',
-                'skills-tools': 'Tools & Systems',
-                'skills-database': 'Database management',
-                'skills-network': 'Network administration',
-                'skills-eda': 'EDA (Exploratory Data Analysis)',
-                'skills-datacleaning': 'Data Cleaning & Quality Management',
-                'skills-bigdata': 'Big Data Processing',
-                'skills-ai-assisted': 'AI-Assisted Analytics',
-                'section-competencies': 'Professional Competencies',
-                'comp-communication': 'Communication & Storytelling',
-                'comp-datastory': 'Data storytelling & narrative building',
-                'comp-presentation': 'Executive presentations & reporting',
-                'comp-technical': 'Technical documentation & writing',
-                'comp-visual': 'Visual communication of insights',
-                'comp-audience': 'Audience-tailored messaging',
-                'comp-collaboration': 'Collaboration & Leadership',
-                'comp-crossfunc': 'Cross-functional team collaboration',
-                'comp-stakeholder': 'Stakeholder management & alignment',
-                'comp-project': 'Project coordination & delivery',
-                'comp-mentoring': 'Knowledge transfer & mentoring',
-                'comp-consensus': 'Consensus building & negotiation',
-                'comp-thinking': 'Analytical & Critical Thinking',
-                'comp-problem': 'Complex problem decomposition',
-                'comp-hypothesis': 'Hypothesis-driven analysis',
-                'comp-business': 'Business acumen & strategic thinking',
-                'comp-decision': 'Data-driven decision framework',
-                'comp-quality': 'Quality assurance & validation',
-                'comp-adaptability': 'Adaptability & Growth',
-                'comp-learning': 'Continuous learning & upskilling',
-                'comp-technology': 'Technology adaptation & innovation',
-                'comp-change': 'Change management & flexibility',
-                'comp-time': 'Time management & prioritization',
-                'comp-resilience': 'Resilience & stress management',
-                'section-experience': 'Work Experience',
-                'job1-title': 'Data Analyst',
-                'job1-resp1': 'Developed 5 analytical projects applying advanced data science and machine learning methodologies',
-                'job1-resp2': 'Implemented predictive models using logistic regression and random forest to identify customer churn patterns',
-                'job1-resp3': 'Designed and executed A/B experiments to evaluate recommendation algorithms, improving data-driven decision making',
-                'job1-resp4': 'Developed interactive visualizations with Plotly, Dash and Matplotlib to communicate key findings to stakeholders',
-                'job1-resp5': 'Created complex SQL queries for bibliometric analysis, identifying significant correlations between business variables',
-                'job1-resp6': 'Developed a performance evaluation system using Python and advanced statistical techniques to optimize operational KPIs',
-                'job1-resp7': 'Conducted comprehensive EDA processes and implemented data cleaning protocols, ensuring high-quality datasets for analysis and modeling',
-                'job1-resp8': 'Led cross-functional collaboration with stakeholders to translate business requirements into analytical solutions, improving decision-making processes across multiple departments',
-                'job2-title': 'Voice & Data Technician',
-                'job2-company': 'National Electoral Institute',
-                'job2-resp1': 'Managed installation and configuration of critical communication systems, ensuring operability during electoral processes',
-                'job2-resp2': 'Resolved technical incidents in voice and data networks with an average response time of less than 2 hours',
-                'job2-resp3': 'Provided specialized technical support to more than 50 users, improving electoral staff productivity',
-                'job2-resp4': 'Participated in implementation and maintenance of network infrastructure for 2024 federal elections, ensuring 99.8% connectivity',
-                'job2-resp5': 'Collaborated in designing security protocols to protect electoral data integrity',
-                'job3-title': 'Managed Services Engineer',
-                'job3-resp1': 'Implemented monitoring solutions for technological infrastructure of multiple corporate clients',
-                'job3-resp2': 'Designed monthly dashboards using visualization tools to present critical KPIs to management',
-                'job3-resp3': 'Analyzed complex technical problems and developed optimized solutions through advanced SQL queries',
-                'job3-resp4': 'Documented technical processes and operational procedures, improving knowledge transfer by 40%',
-                'job3-resp5': 'Implemented database management improvements that increased operational efficiency by 15%',
-                'job4-title': 'Technical Support Manager',
-                'job4-company': 'Soriana Distribution Center',
-                'job4-resp1': 'Administered critical computer systems for distribution center operations processing over 10,000 products daily',
-                'job4-resp2': 'Developed periodic reports using analytical tools to support operational decision making',
-                'job4-resp3': 'Implemented preventive maintenance solutions that reduced technical incidents by 25%',
-                'job4-resp4': 'Managed operational databases and prepared analytical reports for regional logistics management',
-                'section-projects': 'Featured Technical Projects',
-                'project1-title': 'Model Fitness – Customer Retention Predictive Analysis',
-                'project1-desc': 'Developed a predictive model using logistic regression and random forest to identify customers at high risk of churn. Implemented feature engineering techniques with Python and Pandas, improving model accuracy by 15%. Designed a risk scoring system that enabled prioritized retention actions.',
-                'project2-title': 'Online Store – Recommendation System',
-                'project2-desc': 'Designed and implemented an A/B experiment to measure the impact of a new recommendation algorithm. Analyzed user interaction data with Seaborn, identifying statistically significant patterns. Findings supported implementation of the new system, resulting in an 18% increase in cross-sales.',
-                'project3-title': 'CallMeMaybe – Performance Evaluation',
-                'project3-desc': 'Implemented multidimensional analysis of telephone operator performance using Python, Numpy and Statmodels. Applied advanced statistical techniques to establish optimal performance thresholds and developed correlation models between customer satisfaction and operator performance metrics.',
-                'project4-title': 'Literary Service – Bibliometric Analysis',
-                'project4-desc': 'Developed complex SQL queries to extract reading preference patterns using SQLAlchemy and Pandas. Implemented a correlation model between user ratings and editorial characteristics. Created automated reports that increased user engagement by 22%.',
-                'project5-title': 'Advanced EDA & Data Quality Framework',
-                'project5-desc': 'Developed comprehensive EDA methodologies and data cleaning frameworks for large-scale datasets. Implemented automated quality checks, outlier detection algorithms, and missing value treatment protocols. Leveraged AI-assisted analytics to accelerate data exploration processes, reducing analysis time by 35% while improving data quality standards.',
-                'project-cta': '💡 Want similar results for your business? Let's discuss how.',
-                'section-education': 'Education & Certifications',
-                'section-languages': 'Languages',
-                'lang1-name': 'Spanish',
-                'lang1-level': 'Native',
-                'lang2-name': 'English',
-                'lang2-level': 'Upper-Intermediate to Advanced (B2+/C1)',
-                'edu1-degree': 'PhD in Social Sciences',
-                'edu1-institution': 'University of Sonora (UNISON)',
-                'edu2-degree': "Master's in Educational Innovation",
-                'edu2-institution': 'University of Sonora (UNISON)',
-                'edu3-degree': "Bachelor's in Music",
-                'edu3-institution': 'University of Sonora (UNISON)',
-                'footer1': '© 2025 Pedro Fabián Gutiérrez Vidrio. All rights reserved.',
-                'footer2': "Let's connect and transform data into actionable insights"
-            },
-            es: {
-                'subtitle': '🚀 Analista de Datos transformando datos en crecimiento empresarial',
-                'metric1': '18% Incremento en Ventas',
-                'metric2': '99.8% Disponibilidad del Sistema',
-                'metric3': '35% Proceso EDA Más Rápido',
-                'availability': '🌍 Disponible para oportunidades remotas globalmente',
-                'nav-value': 'Valor',
-                'nav-wins': 'Logros',
-                'nav-profile': 'Perfil',
-                'nav-skills': 'Habilidades',
-                'nav-competencies': 'Competencias',
-                'nav-experience': 'Experiencia',
-                'nav-projects': 'Proyectos',
-                'nav-education': 'Educación',
-                'nav-languages': 'Idiomas',
-                'hero-title': '🎯 Ayudo a empresas a incrementar ingresos transformando datos en insights accionables',
-                'hero-desc': 'Especializado en análisis de comportamiento de clientes, modelado predictivo y optimización de rendimiento que impulsan decisiones estratégicas y crecimiento empresarial medible.',
-                'wins-title': 'IMPACTO EMPRESARIAL COMPROBADO',
-                'win1': 'Incremento en ventas cruzadas mediante optimización A/B',
-                'win2': 'Mejora en precisión de modelo de retención de clientes',
-                'win3': 'Disponibilidad del sistema durante infraestructura electoral crítica',
-                'win4': 'Mejora en transferencia de conocimiento mediante documentación',
-                'win5': 'Reducción de incidencias técnicas vía mantenimiento preventivo',
-                'win6': 'Incremento en engagement de usuarios mediante reportes automatizados',
-                'win7': 'Reducción del tiempo de análisis mediante procesos EDA asistidos por IA',
-                'win8': 'Satisfacción de stakeholders mediante narrativa clara de datos',
-                'section-profile': 'Perfil Profesional',
-                'profile-impact': '💼 IMPACTO COMPROBADO: Entregué 18% de incremento en ventas mediante pruebas A/B y 15% de mejora en modelado de retención de clientes para clientes empresariales reales.',
-                'profile-unique': '🎯 VALOR ÚNICO: Combinación excepcional de habilidades de investigación nivel PhD + experiencia práctica en Python/SQL + conocimiento en inteligencia empresarial.',
-                'profile-text1': 'Profesional en Investigación y Análisis de Datos con formación en ciencias sociales y experiencia profesional en sistemas de TI. Especialista en análisis cuantitativo y cualitativo, con habilidades avanzadas en herramientas estadísticas como Python, SQL y librerías especializadas (Pandas, Sci-kit learn). Experto en EDA (Análisis Exploratorio de Datos) y procesos de limpieza de datos que garantizan insights de alta calidad.',
-                'profile-text2': 'Experiencia en visualización de datos utilizando Plotly, Tableau y Matplotlib, y en gestión de sistemas tecnológicos. Capacidad demostrada para diseñar investigaciones, procesar grandes conjuntos de datos con tecnologías de big data, y aprovechar análisis asistido por IA para mayor productividad. Experiencia comprobada en comunicación con stakeholders, colaboración multidisciplinaria, y traducción de hallazgos técnicos complejos en insights empresariales accionables para la toma de decisiones estratégicas.',
-                'section-skills': 'Habilidades Técnicas',
-                'skills-programming': 'Programación y Análisis',
-                'skills-visualization': 'Visualización de Datos',
-                'skills-dashboards': 'Dashboards interactivos',
-                'skills-kpis': 'KPIs y métricas',
-                'skills-methodologies': 'Metodologías',
-                'skills-analysis': 'Análisis cuantitativo y cualitativo',
-                'skills-predictive': 'Modelos predictivos',
-                'skills-statistical': 'Análisis estadístico avanzado',
-                'skills-tools': 'Herramientas y Sistemas',
-                'skills-database': 'Gestión de bases de datos',
-                'skills-network': 'Administración de redes',
-                'skills-eda': 'EDA (Análisis Exploratorio de Datos)',
-                'skills-datacleaning': 'Limpieza y Gestión de Calidad de Datos',
-                'skills-bigdata': 'Procesamiento de Big Data',
-                'skills-ai-assisted': 'Análisis Asistido por IA',
-                'section-competencies': 'Competencias Profesionales',
-                'comp-communication': 'Comunicación y Narrativa',
-                'comp-datastory': 'Narrativa de datos y construcción de historias',
-                'comp-presentation': 'Presentaciones ejecutivas y reportes',
-                'comp-technical': 'Documentación técnica y redacción',
-                'comp-visual': 'Comunicación visual de insights',
-                'comp-audience': 'Mensajes adaptados a la audiencia',
-                'comp-collaboration': 'Colaboración y Liderazgo',
-                'comp-crossfunc': 'Colaboración en equipos multidisciplinarios',
-                'comp-stakeholder': 'Gestión y alineación de stakeholders',
-                'comp-project': 'Coordinación y entrega de proyectos',
-                'comp-mentoring': 'Transferencia de conocimiento y mentoría',
-                'comp-consensus': 'Construcción de consenso y negociación',
-                'comp-thinking': 'Pensamiento Analítico y Crítico',
-                'comp-problem': 'Descomposición de problemas complejos',
-                'comp-hypothesis': 'Análisis dirigido por hipótesis',
-                'comp-business': 'Perspicacia empresarial y pensamiento estratégico',
-                'comp-decision': 'Marco de decisiones basado en datos',
-                'comp-quality': 'Aseguramiento de calidad y validación',
-                'comp-adaptability': 'Adaptabilidad y Crecimiento',
-                'comp-learning': 'Aprendizaje continuo y mejora de habilidades',
-                'comp-technology': 'Adaptación tecnológica e innovación',
-                'comp-change': 'Gestión del cambio y flexibilidad',
-                'comp-time': 'Gestión del tiempo y priorización',
-                'comp-resilience': 'Resistencia y gestión del estrés',
-                'section-experience': 'Experiencia Laboral',
-                'job1-title': 'Analista de datos',
-                'job1-resp1': 'Desarrollé 5 proyectos analíticos aplicando metodologías avanzadas de ciencia de datos y machine learning',
-                'job1-resp2': 'Implementé modelos predictivos utilizando regresión logística y random forest para identificar patrones de abandono de clientes',
-                'job1-resp3': 'Diseñé y ejecuté experimentos A/B para evaluar algoritmos de recomendación, mejorando la toma de decisiones basada en datos',
-                'job1-resp4': 'Desarrollé visualizaciones interactivas con Plotly, Dash y Matplotlib para comunicar hallazgos clave a stakeholders',
-                'job1-resp5': 'Creé consultas SQL complejas para análisis bibliométricos, identificando correlaciones significativas entre variables de negocio',
-                'job1-resp6': 'Elaboré un sistema de evaluación de rendimiento utilizando Python y técnicas estadísticas avanzadas para optimizar KPIs operativos',
-                'job1-resp7': 'Realicé procesos integrales de EDA e implementé protocolos de limpieza de datos, asegurando conjuntos de datos de alta calidad para análisis y modelado',
-                'job1-resp8': 'Dirigí colaboración multidisciplinaria con stakeholders para traducir requerimientos de negocio en soluciones analíticas, mejorando procesos de toma de decisiones en múltiples departamentos',
-                'job2-title': 'Técnico de voz y datos',
-                'job2-company': 'Instituto Nacional Electoral',
-                'job2-resp1': 'Gestioné la instalación y configuración de sistemas de comunicación críticos, garantizando la operatividad durante procesos electorales',
-                'job2-resp2': 'Resolví incidencias técnicas en redes de voz y datos con un tiempo de respuesta promedio de menos de 2 horas',
-                'job2-resp3': 'Brindé soporte técnico especializado a más de 50 usuarios, mejorando la productividad del personal electoral',
-                'job2-resp4': 'Participé en la implementación y mantenimiento de la infraestructura de red para las elecciones federales 2024, asegurando una conectividad del 99.8%',
-                'job2-resp5': 'Colaboré en el diseño de protocolos de seguridad para proteger la integridad de los datos electorales',
-                'job3-title': 'Ingeniero de Servicios Administrados',
-                'job3-resp1': 'Implementé soluciones de monitoreo para infraestructura tecnológica de múltiples clientes corporativos',
-                'job3-resp2': 'Diseñé dashboards mensuales utilizando herramientas de visualización para presentar KPIs críticos a la dirección',
-                'job3-resp3': 'Analicé problemas técnicos complejos y desarrollé soluciones optimizadas mediante consultas SQL avanzadas',
-                'job3-resp4': 'Documenté procesos técnicos y procedimientos operativos, mejorando la transferencia de conocimiento en un 40%',
-                'job3-resp5': 'Implementé mejoras en gestión de bases de datos que incrementaron la eficiencia operativa en un 15%',
-                'job4-title': 'Encargado de Soporte Técnico',
-                'job4-company': 'Centro de Distribución Soriana',
-                'job4-resp1': 'Administré sistemas informáticos críticos para la operación del centro de distribución que procesaba más de 10,000 productos diarios',
-                'job4-resp2': 'Desarrollé reportes periódicos utilizando herramientas analíticas para apoyar la toma de decisiones operativas',
-                'job4-resp3': 'Implementé soluciones de mantenimiento preventivo que redujeron las incidencias técnicas en un 25%',
-                'job4-resp4': 'Gestioné bases de datos operativas y elaboré informes analíticos para la dirección logística regional',
-                'section-projects': 'Proyectos Técnicos Destacados',
-                'project1-title': 'Model Fitness – Análisis Predictivo de Retención',
-                'project1-desc': 'Desarrollé un modelo predictivo utilizando regresión logística y random forest para identificar clientes con alto riesgo de abandono. Implementé técnicas de feature engineering con Python y Pandas, mejorando la precisión del modelo en un 15%. Diseñé un sistema de puntuación de riesgo que permitió priorizar acciones de retención.',
-                'project2-title': 'Tienda en Línea – Sistema de Recomendaciones',
-                'project2-desc': 'Diseñé e implementé un experimento A/B para medir el impacto de un nuevo algoritmo de recomendaciones. Analicé datos de interacción de usuarios con Seaborn, identificando patrones estadísticamente significativos. Los hallazgos fundamentaron la implementación del nuevo sistema, resultando en un incremento del 18% en ventas cruzadas.',
-                'project3-title': 'CallMeMaybe – Evaluación de Rendimiento',
-                'project3-desc': 'Implementé un análisis multidimensional del desempeño de operadores telefónicos utilizando Python, Numpy y Statmodels. Apliqué técnicas estadísticas avanzadas para establecer umbrales de rendimiento óptimo y desarrollé modelos de correlación entre satisfacción del cliente y métricas de desempeño.',
-                'project4-title': 'Servicio Literario – Análisis Bibliométrico',
-                'project4-desc': 'Desarrollé consultas SQL complejas para extraer patrones de preferencia de lectura utilizando SQLAlchemy y Pandas. Implementé un modelo de correlación entre calificaciones de usuarios y características editoriales. Creé informes automatizados que aumentaron el engagement en un 22%.',
-                'project5-title': 'Marco Avanzado de EDA y Calidad de Datos',
-                'project5-desc': 'Desarrollé metodologías integrales de EDA y marcos de limpieza de datos para conjuntos de datos a gran escala. Implementé verificaciones automáticas de calidad, algoritmos de detección de outliers y protocolos de tratamiento de valores faltantes. Aproveché análisis asistido por IA para acelerar procesos de exploración de datos, reduciendo tiempo de análisis en 35% mientras mejoraba estándares de calidad.',
-                'project-cta': '💡 ¿Quieres resultados similares para tu empresa? Conversemos cómo.',
-                'section-education': 'Educación y Certificaciones',
-                'section-languages': 'Idiomas',
-                'lang1-name': 'Español',
-                'lang1-level': 'Nativo',
-                'lang2-name': 'Inglés',
-                'lang2-level': 'Intermedio alto a Avanzado (B2+/C1)',
-                'edu1-degree': 'Doctorado en Ciencias Sociales',
-                'edu1-institution': 'Universidad de Sonora (UNISON)',
-                'edu2-degree': 'Maestría en Innovación Educativa',
-                'edu2-institution': 'Universidad de Sonora (UNISON)',
-                'edu3-degree': 'Licenciatura en Música',
-                'edu3-institution': 'Universidad de Sonora (UNISON)',
-                'footer1': '© 2025 Pedro Fabián Gutiérrez Vidrio. Todos los derechos reservados.',
-                'footer2': 'Conectemos y transformemos datos en insights accionables'
-            }
-        };
+      let idx = 0;
+      const bust = () => 'v=' + Date.now();
 
-        // Current language
-        let currentLang = 'en';
+      const tryNext = () => {
+        idx++;
+        if(idx >= candidates.length) return;
+        img.src = candidates[idx] + '?' + bust();
+      };
 
-        // Function to change language
-        function changeLanguage(lang) {
-            currentLang = lang;
-            
-            // Update button states
-            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-            document.getElementById('btn-es').classList.toggle('active', lang === 'es');
-            
-            // Update HTML lang attribute
-            document.documentElement.lang = lang;
-            
-            // Add transition effect
-            document.body.classList.add('changing');
-            
-            // Update all translatable elements
-            const elements = document.querySelectorAll('[data-translate]');
-            elements.forEach(element => {
-                const key = element.getAttribute('data-translate');
-                if (translations[lang] && translations[lang][key]) {
-                    element.textContent = translations[lang][key];
-                }
-            });
-            
-            // Update navigation links href
-            const navLinks = document.querySelectorAll('.nav a');
-            const sectionIds = {
-                'en': ['value', 'wins', 'profile', 'skills', 'competencies', 'experience', 'projects', 'education', 'languages'],
-                'es': ['valor', 'logros', 'perfil', 'habilidades', 'competencias', 'experiencia', 'proyectos', 'educacion', 'idiomas']
-            };
-            
-            navLinks.forEach((link, index) => {
-                if (sectionIds[lang] && sectionIds[lang][index]) {
-                    link.href = '#' + sectionIds[lang][index];
-                }
-            });
-            
-            // Update section IDs
-            const sections = document.querySelectorAll('.section');
-            sections.forEach((section, index) => {
-                if (sectionIds[lang] && sectionIds[lang][index]) {
-                    section.id = sectionIds[lang][index];
-                }
-            });
-            
-            // Remove transition effect
-            setTimeout(() => {
-                document.body.classList.remove('changing');
-            }, 300);
-        }
+      // Si falla profile.jpg, intenta profile.jpeg, etc.
+      img.onerror = tryNext;
 
-        // Smooth scrolling for navigation links
-        document.addEventListener('click', function(e) {
-            if (e.target.matches('.nav a')) {
-                e.preventDefault();
-                const targetId = e.target.getAttribute('href').substring(1);
-                const target = document.getElementById(targetId);
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            }
-        });
+      // Fuerza cache-bust también en carga inicial
+      img.src = candidates[0] + '?' + bust();
+    })();
 
-        // Initialize page with English
-        document.addEventListener('DOMContentLoaded', function() {
-            changeLanguage('en');
-        });
-    </script>
+    // ===== Language translations =====
+    const translations = {
+      en: {
+        'subtitle': '🚀 Data Analyst turning complex data into business growth',
+        'metric1': '18% Sales Increase',
+        'metric2': '99.8% System Uptime',
+        'metric3': '35% Faster EDA Process',
+        'availability': '🌍 Available for remote opportunities worldwide',
+
+        'nav-value': 'Value',
+        'nav-wins': 'Quick Wins',
+        'nav-profile': 'Profile',
+        'nav-skills': 'Skills',
+        'nav-competencies': 'Competencies',
+        'nav-experience': 'Experience',
+        'nav-projects': 'Projects',
+        'nav-education': 'Education',
+        'nav-languages': 'Languages',
+
+        'hero-title': '🎯 I help businesses increase revenue by transforming raw data into actionable insights',
+        'hero-desc': 'Specialized in customer behavior analysis, predictive modeling, and performance optimization that drive strategic decisions and measurable business growth.',
+        'wins-title': 'PROVEN BUSINESS IMPACT DELIVERED',
+
+        'win1': 'Cross-sales increase through A/B Testing optimization',
+        'win2': 'Model accuracy improvement in customer retention',
+        'win3': 'System uptime during critical electoral infrastructure',
+        'win4': 'Knowledge transfer improvement through documentation',
+        'win5': 'Technical incidents reduction via preventive maintenance',
+        'win6': 'User engagement increase through automated reports',
+        'win7': 'Analysis time reduction through AI-assisted EDA processes',
+        'win8': 'Stakeholder satisfaction through clear data storytelling',
+
+        'section-profile': 'Professional Profile',
+        'profile-impact': '💼 PROVEN IMPACT: Delivered 18% sales increase through A/B testing and 15% improvement in customer retention modeling for real business clients.',
+        'profile-unique': '🎯 UNIQUE VALUE: Rare combination of PhD-level research skills + hands-on Python/SQL expertise + business intelligence acumen.',
+        'profile-text1': 'Professional in Data Research and Analysis with background in social sciences and professional experience in IT systems. Specialist in quantitative and qualitative analysis, with advanced skills in statistical tools such as Python, SQL and specialized libraries (Pandas, Sci-kit learn). Expert in EDA (Exploratory Data Analysis) and data cleaning processes that ensure high-quality insights.',
+        'profile-text2': 'Experience in data visualization using Plotly, Tableau and Matplotlib, and in technology systems management. Demonstrated ability to design research, process large datasets with big data technologies, and leverage AI-assisted analytics for enhanced productivity. Proven expertise in stakeholder communication, cross-functional collaboration, and translating complex technical findings into actionable business insights for strategic decision making.',
+
+        'section-skills': 'Technical Skills',
+        'skills-programming': 'Programming & Analysis',
+        'skills-visualization': 'Data Visualization',
+        'skills-dashboards': 'Interactive Dashboards',
+        'skills-kpis': 'KPIs & Metrics',
+        'skills-methodologies': 'Methodologies',
+        'skills-analysis': 'Quantitative & qualitative analysis',
+        'skills-predictive': 'Predictive models',
+        'skills-statistical': 'Advanced statistical analysis',
+        'skills-tools': 'Tools & Systems',
+        'skills-database': 'Database management',
+        'skills-network': 'Network administration',
+        'skills-eda': 'EDA (Exploratory Data Analysis)',
+        'skills-datacleaning': 'Data Cleaning & Quality Management',
+        'skills-bigdata': 'Big Data Processing',
+        'skills-ai-assisted': 'AI-Assisted Analytics',
+
+        'section-competencies': 'Professional Competencies',
+        'comp-communication': 'Communication & Storytelling',
+        'comp-datastory': 'Data storytelling & narrative building',
+        'comp-presentation': 'Executive presentations & reporting',
+        'comp-technical': 'Technical documentation & writing',
+        'comp-visual': 'Visual communication of insights',
+        'comp-audience': 'Audience-tailored messaging',
+
+        'comp-collaboration': 'Collaboration & Leadership',
+        'comp-crossfunc': 'Cross-functional team collaboration',
+        'comp-stakeholder': 'Stakeholder management & alignment',
+        'comp-project': 'Project coordination & delivery',
+        'comp-mentoring': 'Knowledge transfer & mentoring',
+        'comp-consensus': 'Consensus building & negotiation',
+
+        'comp-thinking': 'Analytical & Critical Thinking',
+        'comp-problem': 'Complex problem decomposition',
+        'comp-hypothesis': 'Hypothesis-driven analysis',
+        'comp-business': 'Business acumen & strategic thinking',
+        'comp-decision': 'Data-driven decision framework',
+        'comp-quality': 'Quality assurance & validation',
+
+        'comp-adaptability': 'Adaptability & Growth',
+        'comp-learning': 'Continuous learning & upskilling',
+        'comp-technology': 'Technology adaptation & innovation',
+        'comp-change': 'Change management & flexibility',
+        'comp-time': 'Time management & prioritization',
+        'comp-resilience': 'Resilience & stress management',
+
+        'section-experience': 'Work Experience',
+        'job1-title': 'Data Analyst',
+        'job1-resp1': 'Developed 5 analytical projects applying advanced data science and machine learning methodologies',
+        'job1-resp2': 'Implemented predictive models using logistic regression and random forest to identify customer churn patterns',
+        'job1-resp3': 'Designed and executed A/B experiments to evaluate recommendation algorithms, improving data-driven decision making',
+        'job1-resp4': 'Developed interactive visualizations with Plotly, Dash and Matplotlib to communicate key findings to stakeholders',
+        'job1-resp5': 'Created complex SQL queries for bibliometric analysis, identifying significant correlations between business variables',
+        'job1-resp6': 'Developed a performance evaluation system using Python and advanced statistical techniques to optimize operational KPIs',
+        'job1-resp7': 'Conducted comprehensive EDA processes and implemented data cleaning protocols, ensuring high-quality datasets for analysis and modeling',
+        'job1-resp8': 'Led cross-functional collaboration with stakeholders to translate business requirements into analytical solutions, improving decision-making processes across multiple departments',
+
+        'job2-title': 'Voice & Data Technician',
+        'job2-company': 'National Electoral Institute',
+        'job2-resp1': 'Managed installation and configuration of critical communication systems, ensuring operability during electoral processes',
+        'job2-resp2': 'Resolved technical incidents in voice and data networks with an average response time of less than 2 hours',
+        'job2-resp3': 'Provided specialized technical support to more than 50 users, improving electoral staff productivity',
+        'job2-resp4': 'Participated in implementation and maintenance of network infrastructure for 2024 federal elections, ensuring 99.8% connectivity',
+        'job2-resp5': 'Collaborated in designing security protocols to protect electoral data integrity',
+
+        'job3-title': 'Managed Services Engineer',
+        'job3-resp1': 'Implemented monitoring solutions for technological infrastructure of multiple corporate clients',
+        'job3-resp2': 'Designed monthly dashboards using visualization tools to present critical KPIs to management',
+        'job3-resp3': 'Analyzed complex technical problems and developed optimized solutions through advanced SQL queries',
+        'job3-resp4': 'Documented technical processes and operational procedures, improving knowledge transfer by 40%',
+        'job3-resp5': 'Implemented database management improvements that increased operational efficiency by 15%',
+
+        'job4-title': 'Technical Support Manager',
+        'job4-company': 'Soriana Distribution Center',
+        'job4-resp1': 'Administered critical computer systems for distribution center operations processing over 10,000 products daily',
+        'job4-resp2': 'Developed periodic reports using analytical tools to support operational decision making',
+        'job4-resp3': 'Implemented preventive maintenance solutions that reduced technical incidents by 25%',
+        'job4-resp4': 'Managed operational databases and prepared analytical reports for regional logistics management',
+
+        'section-projects': 'Featured Technical Projects',
+        'project1-title': 'Model Fitness – Customer Retention Predictive Analysis',
+        'project1-desc': 'Developed a predictive model using logistic regression and random forest to identify customers at high risk of churn. Implemented feature engineering techniques with Python and Pandas, improving model accuracy by 15%. Designed a risk scoring system that enabled prioritized retention actions.',
+        'project2-title': 'Online Store – Recommendation System',
+        'project2-desc': 'Designed and implemented an A/B experiment to measure the impact of a new recommendation algorithm. Analyzed user interaction data with Seaborn, identifying statistically significant patterns. Findings supported implementation of the new system, resulting in an 18% increase in cross-sales.',
+        'project3-title': 'CallMeMaybe – Performance Evaluation',
+        'project3-desc': 'Implemented multidimensional analysis of telephone operator performance using Python, Numpy and Statmodels. Applied advanced statistical techniques to establish optimal performance thresholds and developed correlation models between customer satisfaction and operator performance metrics.',
+        'project4-title': 'Literary Service – Bibliometric Analysis',
+        'project4-desc': 'Developed complex SQL queries to extract reading preference patterns using SQLAlchemy and Pandas. Implemented a correlation model between user ratings and editorial characteristics. Created automated reports that increased user engagement by 22%.',
+        'project5-title': 'Advanced EDA & Data Quality Framework',
+        'project5-desc': 'Developed comprehensive EDA methodologies and data cleaning frameworks for large-scale datasets. Implemented automated quality checks, outlier detection algorithms, and missing value treatment protocols. Leveraged AI-assisted analytics to accelerate data exploration processes, reducing analysis time by 35% while improving data quality standards.',
+        'project-cta': '💡 Want similar results for your business? Let\'s discuss how.',
+
+        'section-education': 'Education & Certifications',
+        'edu1-degree': 'PhD in Social Sciences',
+        'edu1-institution': 'University of Sonora (UNISON)',
+        'edu2-degree': 'Master\'s in Educational Innovation',
+        'edu2-institution': 'University of Sonora (UNISON)',
+        'edu3-degree': 'Bachelor\'s in Music',
+        'edu3-institution': 'University of Sonora (UNISON)',
+
+        'section-languages': 'Languages',
+        'lang1-name': 'Spanish',
+        'lang1-level': 'Native',
+        'lang2-name': 'English',
+        'lang2-level': 'Upper-Intermediate to Advanced (B2+/C1)',
+
+        'footer1': '© 2025 Pedro Fabián Gutiérrez Vidrio. All rights reserved.',
+        'footer2': 'Let\'s connect and transform data into actionable insights'
+      },
+
+      es: {
+        'subtitle': '🚀 Analista de Datos transformando datos en crecimiento empresarial',
+        'metric1': '18% Incremento en Ventas',
+        'metric2': '99.8% Disponibilidad del Sistema',
+        'metric3': '35% Proceso EDA Más Rápido',
+        'availability': '🌍 Disponible para oportunidades remotas globalmente',
+
+        'nav-value': 'Valor',
+        'nav-wins': 'Logros',
+        'nav-profile': 'Perfil',
+        'nav-skills': 'Habilidades',
+        'nav-competencies': 'Competencias',
+        'nav-experience': 'Experiencia',
+        'nav-projects': 'Proyectos',
+        'nav-education': 'Educación',
+        'nav-languages': 'Idiomas',
+
+        'hero-title': '🎯 Ayudo a empresas a incrementar ingresos transformando datos en insights accionables',
+        'hero-desc': 'Especializado en análisis de comportamiento de clientes, modelado predictivo y optimización de rendimiento que impulsan decisiones estratégicas y crecimiento empresarial medible.',
+        'wins-title': 'IMPACTO EMPRESARIAL COMPROBADO',
+
+        'win1': 'Incremento en ventas cruzadas mediante optimización A/B',
+        'win2': 'Mejora en precisión de modelo de retención de clientes',
+        'win3': 'Disponibilidad del sistema durante infraestructura electoral crítica',
+        'win4': 'Mejora en transferencia de conocimiento mediante documentación',
+        'win5': 'Reducción de incidencias técnicas vía mantenimiento preventivo',
+        'win6': 'Incremento en engagement de usuarios mediante reportes automatizados',
+        'win7': 'Reducción del tiempo de análisis mediante procesos EDA asistidos por IA',
+        'win8': 'Satisfacción de stakeholders mediante narrativa clara de datos',
+
+        'section-profile': 'Perfil Profesional',
+        'profile-impact': '💼 IMPACTO COMPROBADO: Entregué 18% de incremento en ventas mediante pruebas A/B y 15% de mejora en modelado de retención de clientes para clientes empresariales reales.',
+        'profile-unique': '🎯 VALOR ÚNICO: Combinación excepcional de habilidades de investigación nivel PhD + experiencia práctica en Python/SQL + conocimiento en inteligencia empresarial.',
+        'profile-text1': 'Profesional en Investigación y Análisis de Datos con formación en ciencias sociales y experiencia profesional en sistemas de TI. Especialista en análisis cuantitativo y cualitativo, con habilidades avanzadas en herramientas estadísticas como Python, SQL y librerías especializadas (Pandas, Sci-kit learn). Experto en EDA (Análisis Exploratorio de Datos) y procesos de limpieza de datos que garantizan insights de alta calidad.',
+        'profile-text2': 'Experiencia en visualización de datos utilizando Plotly, Tableau y Matplotlib, y en gestión de sistemas tecnológicos. Capacidad demostrada para diseñar investigaciones, procesar grandes conjuntos de datos con tecnologías de big data, y aprovechar análisis asistido por IA para mayor productividad. Experiencia comprobada en comunicación con stakeholders, colaboración multidisciplinaria, y traducción de hallazgos técnicos complejos en insights empresariales accionables para la toma de decisiones estratégicas.',
+
+        'section-skills': 'Habilidades Técnicas',
+        'skills-programming': 'Programación y Análisis',
+        'skills-visualization': 'Visualización de Datos',
+        'skills-dashboards': 'Dashboards interactivos',
+        'skills-kpis': 'KPIs y métricas',
+        'skills-methodologies': 'Metodologías',
+        'skills-analysis': 'Análisis cuantitativo y cualitativo',
+        'skills-predictive': 'Modelos predictivos',
+        'skills-statistical': 'Análisis estadístico avanzado',
+        'skills-tools': 'Herramientas y Sistemas',
+        'skills-database': 'Gestión de bases de datos',
+        'skills-network': 'Administración de redes',
+        'skills-eda': 'EDA (Análisis Exploratorio de Datos)',
+        'skills-datacleaning': 'Limpieza y Gestión de Calidad de Datos',
+        'skills-bigdata': 'Procesamiento de Big Data',
+        'skills-ai-assisted': 'Análisis Asistido por IA',
+
+        'section-competencies': 'Competencias Profesionales',
+        'comp-communication': 'Comunicación y Narrativa',
+        'comp-datastory': 'Narrativa de datos y construcción de historias',
+        'comp-presentation': 'Presentaciones ejecutivas y reportes',
+        'comp-technical': 'Documentación técnica y redacción',
+        'comp-visual': 'Comunicación visual de insights',
+        'comp-audience': 'Mensajes adaptados a la audiencia',
+
+        'comp-collaboration': 'Colaboración y Liderazgo',
+        'comp-crossfunc': 'Colaboración en equipos multidisciplinarios',
+        'comp-stakeholder': 'Gestión y alineación de stakeholders',
+        'comp-project': 'Coordinación y entrega de proyectos',
+        'comp-mentoring': 'Transferencia de conocimiento y mentoría',
+        'comp-consensus': 'Construcción de consenso y negociación',
+
+        'comp-thinking': 'Pensamiento Analítico y Crítico',
+        'comp-problem': 'Descomposición de problemas complejos',
+        'comp-hypothesis': 'Análisis dirigido por hipótesis',
+        'comp-business': 'Perspicacia empresarial y pensamiento estratégico',
+        'comp-decision': 'Marco de decisiones basado en datos',
+        'comp-quality': 'Aseguramiento de calidad y validación',
+
+        'comp-adaptability': 'Adaptabilidad y Crecimiento',
+        'comp-learning': 'Aprendizaje continuo y mejora de habilidades',
+        'comp-technology': 'Adaptación tecnológica e innovación',
+        'comp-change': 'Gestión del cambio y flexibilidad',
+        'comp-time': 'Gestión del tiempo y priorización',
+        'comp-resilience': 'Resistencia y gestión del estrés',
+
+        'section-experience': 'Experiencia Laboral',
+        'job1-title': 'Analista de datos',
+        'job1-resp1': 'Desarrollé 5 proyectos analíticos aplicando metodologías avanzadas de ciencia de datos y machine learning',
+        'job1-resp2': 'Implementé modelos predictivos utilizando regresión logística y random forest para identificar patrones de abandono de clientes',
+        'job1-resp3': 'Diseñé y ejecuté experimentos A/B para evaluar algoritmos de recomendación, mejorando la toma de decisiones basada en datos',
+        'job1-resp4': 'Desarrollé visualizaciones interactivas con Plotly, Dash y Matplotlib para comunicar hallazgos clave a stakeholders',
+        'job1-resp5': 'Creé consultas SQL complejas para análisis bibliométricos, identificando correlaciones significativas entre variables de negocio',
+        'job1-resp6': 'Elaboré un sistema de evaluación de rendimiento utilizando Python y técnicas estadísticas avanzadas para optimizar KPIs operativos',
+        'job1-resp7': 'Realicé procesos integrales de EDA e implementé protocolos de limpieza de datos, asegurando conjuntos de datos de alta calidad para análisis y modelado',
+        'job1-resp8': 'Dirigí colaboración multidisciplinaria con stakeholders para traducir requerimientos de negocio en soluciones analíticas, mejorando procesos de toma de decisiones en múltiples departamentos',
+
+        'job2-title': 'Técnico de voz y datos',
+        'job2-company': 'Instituto Nacional Electoral',
+        'job2-resp1': 'Gestioné la instalación y configuración de sistemas de comunicación críticos, garantizando la operatividad durante procesos electorales',
+        'job2-resp2': 'Resolví incidencias técnicas en redes de voz y datos con un tiempo de respuesta promedio de menos de 2 horas',
+        'job2-resp3': 'Brindé soporte técnico especializado a más de 50 usuarios, mejorando la productividad del personal electoral',
+        'job2-resp4': 'Participé en la implementación y mantenimiento de la infraestructura de red para las elecciones federales 2024, asegurando una conectividad del 99.8%',
+        'job2-resp5': 'Colaboré en el diseño de protocolos de seguridad para proteger la integridad de los datos electorales',
+
+        'job3-title': 'Ingeniero de Servicios Administrados',
+        'job3-resp1': 'Implementé soluciones de monitoreo para infraestructura tecnológica de múltiples clientes corporativos',
+        'job3-resp2': 'Diseñé dashboards mensuales utilizando herramientas de visualización para presentar KPIs críticos a la dirección',
+        'job3-resp3': 'Analicé problemas técnicos complejos y desarrollé soluciones optimizadas mediante consultas SQL avanzadas',
+        'job3-resp4': 'Documenté procesos técnicos y procedimientos operativos, mejorando la transferencia de conocimiento en un 40%',
+        'job3-resp5': 'Implementé mejoras en gestión de bases de datos que incrementaron la eficiencia operativa en un 15%',
+
+        'job4-title': 'Encargado de Soporte Técnico',
+        'job4-company': 'Centro de Distribución Soriana',
+        'job4-resp1': 'Administré sistemas informáticos críticos para la operación del centro de distribución que procesaba más de 10,000 productos diarios',
+        'job4-resp2': 'Desarrollé reportes periódicos utilizando herramientas analíticas para apoyar la toma de decisiones operativas',
+        'job4-resp3': 'Implementé soluciones de mantenimiento preventivo que redujeron las incidencias técnicas en un 25%',
+        'job4-resp4': 'Gestioné bases de datos operativas y elaboré informes analíticos para la dirección logística regional',
+
+        'section-projects': 'Proyectos Técnicos Destacados',
+        'project1-title': 'Model Fitness – Análisis Predictivo de Retención',
+        'project1-desc': 'Desarrollé un modelo predictivo utilizando regresión logística y random forest para identificar clientes con alto riesgo de abandono. Implementé técnicas de feature engineering con Python y Pandas, mejorando la precisión del modelo en un 15%. Diseñé un sistema de puntuación de riesgo que permitió priorizar acciones de retención.',
+        'project2-title': 'Tienda en Línea – Sistema de Recomendaciones',
+        'project2-desc': 'Diseñé e implementé un experimento A/B para medir el impacto de un nuevo algoritmo de recomendaciones. Analicé datos de interacción de usuarios con Seaborn, identificando patrones estadísticamente significativos. Los hallazgos fundamentaron la implementación del nuevo sistema, resultando en un incremento del 18% en ventas cruzadas.',
+        'project3-title': 'CallMeMaybe – Evaluación de Rendimiento',
+        'project3-desc': 'Implementé un análisis multidimensional del desempeño de operadores telefónicos utilizando Python, Numpy y Statmodels. Apliqué técnicas estadísticas avanzadas para establecer umbrales de rendimiento óptimo y desarrollé modelos de correlación entre satisfacción del cliente y métricas de desempeño.',
+        'project4-title': 'Servicio Literario – Análisis Bibliométrico',
+        'project4-desc': 'Desarrollé consultas SQL complejas para extraer patrones de preferencia de lectura utilizando SQLAlchemy y Pandas. Implementé un modelo de correlación entre calificaciones de usuarios y características editoriales. Creé informes automatizados que aumentaron el engagement en un 22%.',
+        'project5-title': 'Marco Avanzado de EDA y Calidad de Datos',
+        'project5-desc': 'Desarrollé metodologías integrales de EDA y marcos de limpieza de datos para conjuntos de datos a gran escala. Implementé verificaciones automáticas de calidad, algoritmos de detección de outliers y protocolos de tratamiento de valores faltantes. Aproveché análisis asistido por IA para acelerar procesos de exploración de datos, reduciendo tiempo de análisis en 35% mientras mejoraba estándares de calidad.',
+        'project-cta': '💡 ¿Quieres resultados similares para tu empresa? Conversemos cómo.',
+
+        'section-education': 'Educación y Certificaciones',
+        'edu1-degree': 'Doctorado en Ciencias Sociales',
+        'edu1-institution': 'Universidad de Sonora (UNISON)',
+        'edu2-degree': 'Maestría en Innovación Educativa',
+        'edu2-institution': 'Universidad de Sonora (UNISON)',
+        'edu3-degree': 'Licenciatura en Música',
+        'edu3-institution': 'Universidad de Sonora (UNISON)',
+
+        'section-languages': 'Idiomas',
+        'lang1-name': 'Español',
+        'lang1-level': 'Nativo',
+        'lang2-name': 'Inglés',
+        'lang2-level': 'Intermedio alto a Avanzado (B2+/C1)',
+
+        'footer1': '© 2025 Pedro Fabián Gutiérrez Vidrio. Todos los derechos reservados.',
+        'footer2': 'Conectemos y transformemos datos en insights accionables'
+      }
+    };
+
+    function setButtonState(lang){
+      const enBtn = document.getElementById('btn-en');
+      const esBtn = document.getElementById('btn-es');
+      const isEN = lang === 'en';
+
+      enBtn.classList.toggle('active', isEN);
+      esBtn.classList.toggle('active', !isEN);
+
+      enBtn.setAttribute('aria-pressed', String(isEN));
+      esBtn.setAttribute('aria-pressed', String(!isEN));
+    }
+
+    function applyTranslations(lang){
+      const elements = document.querySelectorAll('[data-translate]');
+      elements.forEach(el => {
+        const key = el.getAttribute('data-translate');
+        const value = translations?.[lang]?.[key];
+        if (value) el.textContent = value;
+      });
+    }
+
+    function changeLanguage(lang){
+      // Seguridad: si llega algo raro
+      if (!translations[lang]) lang = 'en';
+
+      document.documentElement.lang = lang;
+      setButtonState(lang);
+      applyTranslations(lang);
+
+      // Persistir selección
+      try { localStorage.setItem('preferredLang', lang); } catch(e) {}
+    }
+
+    // Smooth scrolling (sin tocar IDs/hrefs)
+    document.addEventListener('click', function(e){
+      const a = e.target.closest('.nav a');
+      if(!a) return;
+
+      e.preventDefault();
+      const targetId = a.getAttribute('href').slice(1);
+      const target = document.getElementById(targetId);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // Init
+    document.addEventListener('DOMContentLoaded', function(){
+      let preferred = 'en';
+      try {
+        const saved = localStorage.getItem('preferredLang');
+        if (saved && (saved === 'en' || saved === 'es')) preferred = saved;
+      } catch(e) {}
+      changeLanguage(preferred);
+    });
+  </script>
 </body>
 </html>
