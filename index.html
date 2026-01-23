@@ -737,6 +737,21 @@
       <section id="experience" class="section">
         <h2><i class="fas fa-briefcase"></i><span data-translate="section-experience">Work Experience</span></h2>
 
+        <!-- ✅ Added from CV: TELUS Digital (Freelancer) -->
+        <div class="experience-card">
+          <div class="experience-header">
+            <div>
+              <div class="job-title" data-translate="job0-title">Data Partner – Business Writer (Freelancer)</div>
+              <div class="company">TELUS Digital | Remote</div>
+            </div>
+            <div class="date">11/2025 - Present</div>
+          </div>
+          <ul class="responsibilities">
+            <li data-translate="job0-resp1">Analysis and validation of data-driven content used for large language model training.</li>
+            <li data-translate="job0-resp2">Documentation of criteria and findings to ensure consistency, quality, and knowledge transfer.</li>
+          </ul>
+        </div>
+
         <div class="experience-card">
           <div class="experience-header">
             <div>
@@ -794,10 +809,12 @@
         <div class="experience-card">
           <div class="experience-header">
             <div>
-              <div class="job-title" data-translate="job4-title">Technical Support Manager</div>
+              <!-- ✅ aligned to CV title -->
+              <div class="job-title" data-translate="job4-title">Technical Support Lead</div>
               <div class="company" data-translate="job4-company">Soriana Distribution Center</div>
             </div>
-            <div class="date">06/2019 - 07/2021</div>
+            <!-- ✅ corrected dates from CV -->
+            <div class="date">2018 - 2019</div>
           </div>
           <ul class="responsibilities">
             <li data-translate="job4-resp1">Administered critical computer systems for distribution center operations processing over 10,000 products daily</li>
@@ -1017,6 +1034,12 @@
         'comp-resilience': 'Resilience & stress management',
 
         'section-experience': 'Work Experience',
+
+        // ✅ TELUS (added)
+        'job0-title': 'Data Partner – Business Writer (Freelancer)',
+        'job0-resp1': 'Analysis and validation of data-driven content used for large language model training.',
+        'job0-resp2': 'Documentation of criteria and findings to ensure consistency, quality, and knowledge transfer.',
+
         'job1-title': 'Data Analyst',
         'job1-resp1': 'Developed 5 analytical projects applying advanced data science and machine learning methodologies',
         'job1-resp2': 'Implemented predictive models using logistic regression and random forest to identify customer churn patterns',
@@ -1042,7 +1065,8 @@
         'job3-resp4': 'Documented technical processes and operational procedures, improving knowledge transfer by 40%',
         'job3-resp5': 'Implemented database management improvements that increased operational efficiency by 15%',
 
-        'job4-title': 'Technical Support Manager',
+        // ✅ aligned to CV title
+        'job4-title': 'Technical Support Lead',
         'job4-company': 'Soriana Distribution Center',
         'job4-resp1': 'Administered critical computer systems for distribution center operations processing over 10,000 products daily',
         'job4-resp2': 'Developed periodic reports using analytical tools to support operational decision making',
@@ -1163,6 +1187,12 @@
         'comp-resilience': 'Resistencia y gestión del estrés',
 
         'section-experience': 'Experiencia Laboral',
+
+        // ✅ TELUS (added)
+        'job0-title': 'Data Partner – Business Writer (Freelancer)',
+        'job0-resp1': 'Análisis y validación de contenido basado en datos utilizado para entrenamiento de modelos de lenguaje (LLM).',
+        'job0-resp2': 'Documentación de criterios y hallazgos para asegurar consistencia, calidad y transferencia de conocimiento.',
+
         'job1-title': 'Analista de datos',
         'job1-resp1': 'Desarrollé 5 proyectos analíticos aplicando metodologías avanzadas de ciencia de datos y machine learning',
         'job1-resp2': 'Implementé modelos predictivos utilizando regresión logística y random forest para identificar patrones de abandono de clientes',
@@ -1188,7 +1218,8 @@
         'job3-resp4': 'Documenté procesos técnicos y procedimientos operativos, mejorando la transferencia de conocimiento en un 40%',
         'job3-resp5': 'Implementé mejoras en gestión de bases de datos que incrementaron la eficiencia operativa en un 15%',
 
-        'job4-title': 'Encargado de Soporte Técnico',
+        // ✅ aligned to CV title
+        'job4-title': 'Líder de Soporte Técnico',
         'job4-company': 'Centro de Distribución Soriana',
         'job4-resp1': 'Administré sistemas informáticos críticos para la operación del centro de distribución que procesaba más de 10,000 productos diarios',
         'job4-resp2': 'Desarrollé reportes periódicos utilizando herramientas analíticas para apoyar la toma de decisiones operativas',
@@ -1273,13 +1304,4 @@
 
     // Init
     document.addEventListener('DOMContentLoaded', function(){
-      let preferred = 'en';
-      try {
-        const saved = localStorage.getItem('preferredLang');
-        if (saved && (saved === 'en' || saved === 'es')) preferred = saved;
-      } catch(e) {}
-      changeLanguage(preferred);
-    });
-  </script>
-</body>
-</html>
+      let preferred = 'en
