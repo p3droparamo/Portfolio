@@ -737,7 +737,7 @@
       <section id="experience" class="section">
         <h2><i class="fas fa-briefcase"></i><span data-translate="section-experience">Work Experience</span></h2>
 
-        <!-- ✅ Added from CV: TELUS Digital (Freelancer) -->
+        <!-- TELUS (Added) -->
         <div class="experience-card">
           <div class="experience-header">
             <div>
@@ -778,7 +778,7 @@
               <div class="job-title" data-translate="job2-title">Voice & Data Technician</div>
               <div class="company" data-translate="job2-company">National Electoral Institute</div>
             </div>
-            <div class="date">01/2024 – 07/2024</div>
+            <div class="date">01/2024 - 07/2024</div>
           </div>
           <ul class="responsibilities">
             <li data-translate="job2-resp1">Managed installation and configuration of critical communication systems, ensuring operability during electoral processes</li>
@@ -809,11 +809,9 @@
         <div class="experience-card">
           <div class="experience-header">
             <div>
-              <!-- ✅ aligned to CV title -->
               <div class="job-title" data-translate="job4-title">Technical Support Lead</div>
               <div class="company" data-translate="job4-company">Soriana Distribution Center</div>
             </div>
-            <!-- ✅ corrected dates from CV -->
             <div class="date">2018 - 2019</div>
           </div>
           <ul class="responsibilities">
@@ -927,12 +925,7 @@
       const img = document.getElementById('profilePhoto');
       if(!img) return;
 
-      const candidates = [
-        'profile.jpg',
-        'profile.jpeg',
-        'profile.png'
-      ];
-
+      const candidates = ['profile.jpg','profile.jpeg','profile.png'];
       let idx = 0;
       const bust = () => 'v=' + Date.now();
 
@@ -942,10 +935,7 @@
         img.src = candidates[idx] + '?' + bust();
       };
 
-      // Si falla profile.jpg, intenta profile.jpeg, etc.
       img.onerror = tryNext;
-
-      // Fuerza cache-bust también en carga inicial
       img.src = candidates[0] + '?' + bust();
     })();
 
@@ -1035,7 +1025,7 @@
 
         'section-experience': 'Work Experience',
 
-        // ✅ TELUS (added)
+        // TELUS
         'job0-title': 'Data Partner – Business Writer (Freelancer)',
         'job0-resp1': 'Analysis and validation of data-driven content used for large language model training.',
         'job0-resp2': 'Documentation of criteria and findings to ensure consistency, quality, and knowledge transfer.',
@@ -1065,7 +1055,7 @@
         'job3-resp4': 'Documented technical processes and operational procedures, improving knowledge transfer by 40%',
         'job3-resp5': 'Implemented database management improvements that increased operational efficiency by 15%',
 
-        // ✅ aligned to CV title
+        // Soriana (title adjusted)
         'job4-title': 'Technical Support Lead',
         'job4-company': 'Soriana Distribution Center',
         'job4-resp1': 'Administered critical computer systems for distribution center operations processing over 10,000 products daily',
@@ -1084,14 +1074,14 @@
         'project4-desc': 'Developed complex SQL queries to extract reading preference patterns using SQLAlchemy and Pandas. Implemented a correlation model between user ratings and editorial characteristics. Created automated reports that increased user engagement by 22%.',
         'project5-title': 'Advanced EDA & Data Quality Framework',
         'project5-desc': 'Developed comprehensive EDA methodologies and data cleaning frameworks for large-scale datasets. Implemented automated quality checks, outlier detection algorithms, and missing value treatment protocols. Leveraged AI-assisted analytics to accelerate data exploration processes, reducing analysis time by 35% while improving data quality standards.',
-        'project-cta': '💡 Want similar results for your business? Let\'s discuss how.',
+        'project-cta': "💡 Want similar results for your business? Let's discuss how.",
 
         'section-education': 'Education & Certifications',
         'edu1-degree': 'PhD in Social Sciences',
         'edu1-institution': 'University of Sonora (UNISON)',
-        'edu2-degree': 'Master\'s in Educational Innovation',
+        'edu2-degree': "Master's in Educational Innovation",
         'edu2-institution': 'University of Sonora (UNISON)',
-        'edu3-degree': 'Bachelor\'s in Music',
+        'edu3-degree': "Bachelor's in Music",
         'edu3-institution': 'University of Sonora (UNISON)',
 
         'section-languages': 'Languages',
@@ -1101,7 +1091,7 @@
         'lang2-level': 'Upper-Intermediate to Advanced (B2+/C1)',
 
         'footer1': '© 2025 Pedro Fabián Gutiérrez Vidrio. All rights reserved.',
-        'footer2': 'Let\'s connect and transform data into actionable insights'
+        'footer2': "Let's connect and transform data into actionable insights"
       },
 
       es: {
@@ -1188,7 +1178,7 @@
 
         'section-experience': 'Experiencia Laboral',
 
-        // ✅ TELUS (added)
+        // TELUS
         'job0-title': 'Data Partner – Business Writer (Freelancer)',
         'job0-resp1': 'Análisis y validación de contenido basado en datos utilizado para entrenamiento de modelos de lenguaje (LLM).',
         'job0-resp2': 'Documentación de criterios y hallazgos para asegurar consistencia, calidad y transferencia de conocimiento.',
@@ -1218,7 +1208,7 @@
         'job3-resp4': 'Documenté procesos técnicos y procedimientos operativos, mejorando la transferencia de conocimiento en un 40%',
         'job3-resp5': 'Implementé mejoras en gestión de bases de datos que incrementaron la eficiencia operativa en un 15%',
 
-        // ✅ aligned to CV title
+        // Soriana (title adjusted)
         'job4-title': 'Líder de Soporte Técnico',
         'job4-company': 'Centro de Distribución Soriana',
         'job4-resp1': 'Administré sistemas informáticos críticos para la operación del centro de distribución que procesaba más de 10,000 productos diarios',
@@ -1258,36 +1248,34 @@
       }
     };
 
+    // ===== Language switch functions =====
     function setButtonState(lang){
       const enBtn = document.getElementById('btn-en');
       const esBtn = document.getElementById('btn-es');
       const isEN = lang === 'en';
 
-      enBtn.classList.toggle('active', isEN);
-      esBtn.classList.toggle('active', !isEN);
+      if(enBtn) enBtn.classList.toggle('active', isEN);
+      if(esBtn) esBtn.classList.toggle('active', !isEN);
 
-      enBtn.setAttribute('aria-pressed', String(isEN));
-      esBtn.setAttribute('aria-pressed', String(!isEN));
+      if(enBtn) enBtn.setAttribute('aria-pressed', String(isEN));
+      if(esBtn) esBtn.setAttribute('aria-pressed', String(!isEN));
     }
 
     function applyTranslations(lang){
       const elements = document.querySelectorAll('[data-translate]');
       elements.forEach(el => {
         const key = el.getAttribute('data-translate');
-        const value = translations?.[lang]?.[key];
-        if (value) el.textContent = value;
+        const value = (translations[lang] && translations[lang][key]) ? translations[lang][key] : null;
+        if (value !== null && value !== undefined) el.textContent = value;
       });
     }
 
+    // Make sure this function is GLOBAL (for inline onclick)
     function changeLanguage(lang){
-      // Seguridad: si llega algo raro
       if (!translations[lang]) lang = 'en';
-
       document.documentElement.lang = lang;
       setButtonState(lang);
       applyTranslations(lang);
-
-      // Persistir selección
       try { localStorage.setItem('preferredLang', lang); } catch(e) {}
     }
 
@@ -1304,4 +1292,13 @@
 
     // Init
     document.addEventListener('DOMContentLoaded', function(){
-      let preferred = 'en
+      let preferred = 'en';
+      try {
+        const saved = localStorage.getItem('preferredLang');
+        if (saved && (saved === 'en' || saved === 'es')) preferred = saved;
+      } catch(e) {}
+      changeLanguage(preferred);
+    });
+  </script>
+</body>
+</html>
