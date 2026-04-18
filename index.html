@@ -1588,7 +1588,7 @@ function setManualLanguage(language) {
 function addMessage(text, role) {
   const div = document.createElement("div");
   div.className = `chat-message ${role}`;
-  div.innerHTML = text;
+  div.textContent = text;
   box.appendChild(div);
   box.scrollTop = box.scrollHeight;
 }
@@ -1642,9 +1642,7 @@ input.addEventListener("keypress", function(event) {
   }
 });
 
-// estado inicial
 updateWidgetUI("en");
 </script>
-
 </body>
 </html>
